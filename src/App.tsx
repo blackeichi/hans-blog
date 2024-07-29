@@ -4,7 +4,7 @@ import { GLOBAL_COLOR } from "./utils/constans";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { Helmet } from "react-helmet";
 import { Layout } from "$components/Layout";
-import { ClipLoader } from "react-spinners";
+import "./App.css";
 
 const HomePage = lazy(() => import("$routes/Home"));
 
@@ -20,7 +20,7 @@ function App() {
           <Suspense
             fallback={
               <Loader>
-                <ClipLoader />
+                <></>
               </Loader>
             }
           >
@@ -64,7 +64,10 @@ time, mark, audio, video {
 	font: inherit;
 	vertical-align: baseline;
   box-sizing: border-box;
-  font-family: "NotoSans";
+  -webkit-user-select:none;
+  -moz-user-select:none;
+  -ms-user-select:none;
+  user-select:none
 }
 /* HTML5 display-role reset for older browsers */
 article, aside, details, figcaption, figure, 
@@ -117,4 +120,5 @@ input:-webkit-autofill:active {
     -webkit-box-shadow: 0 0 0px 1000px inherit inset;
     transition: background-color 5000s ease-in-out 0s;
 }
+
 `;
