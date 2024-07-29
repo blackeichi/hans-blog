@@ -1,19 +1,19 @@
-export const TASK_LIST = [
-  { title: "MyComputer", icon: "/images/myComputer.png" },
-  { title: "Documents", icon: "/images/postsFolder.png" },
-  { title: "Tags", icon: "/images/tagsFolder.png" },
-  { title: "Search", icon: "/images/search.png" },
+export const TASK_LIST = {
+  MyComputer: "MyComputer",
+  Documents: "Documents",
+  Tags: "Tags",
+  Search: "Search",
+};
+export const TASK_ICONS = [
+  { title: TASK_LIST.MyComputer, icon: "/images/myComputer.png" },
+  { title: TASK_LIST.Documents, icon: "/images/postsFolder.png" },
+  { title: TASK_LIST.Tags, icon: "/images/tagsFolder.png" },
+  { title: TASK_LIST.Search, icon: "/images/search.png" },
 ];
 
 export const TASK_STATE = {
-  NONE: null,
-  HIDE: "HIDE",
-  OPEN: "OPEN",
+  HIDE: "hide",
+  OPEN: "open",
 };
 
-export const INITIAL_TASK_STATE = [
-  { title: "MyComputer", state: TASK_STATE.NONE },
-  { title: "Documents", state: TASK_STATE.NONE },
-  { title: "Tags", state: TASK_STATE.NONE },
-  { title: "Search", state: TASK_STATE.NONE },
-];
+export const DEFAULT_SIZE = 500;

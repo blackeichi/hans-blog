@@ -1,43 +1,43 @@
-import React, { useState } from "react";
+import { memo, useState } from "react";
 import { styled } from "styled-components";
-import {
-  TselectedIndexState,
-  mouseLocaleState,
-  openState,
-  openedFolderState,
-} from "$utils/atom";
+import { mouseLocaleState, openState } from "$utils/atom";
 import { useSetRecoilState } from "recoil";
 import { HandleOpenState } from "$components/Common/handleOpenState";
 import { ContextComponent } from "$components/ContextComponent.js";
 import { IconContextMenu } from "./IconContextMenu";
-import { TASK_STATE } from "$routes/Home/constants";
+import { SetOpenedFolders } from "$routes/Home/actions";
 
 interface HomeIconProps {
   item: {
     title: string;
     icon: string;
   };
-  index: number;
 }
-
-export const HomeIcon = ({ item, index }: HomeIconProps) => {
+export const HomeIcon = memo(({ item }: HomeIconProps) => {
+  const [screen, setScreen] = useState({ innerWidth: 0, innerHeight: 0 });
+  const onSetOpenedFolders: Function = SetOpenedFolders([item.title], screen);
   const [isSelected, setIsSelected] = useState<boolean>(false);
   const setOpenState = useSetRecoilState(openState);
   const setMouseLocale = useSetRecoilState(mouseLocaleState);
-  const setOpendFolder = useSetRecoilState(openedFolderState);
-  const onClick = (event: React.MouseEvent<HTMLElement>) => {
+  const onClick = (event: any) => {
     event.stopPropagation();
+    setScreen({
+      innerWidth: event?.view?.innerWidth || 0,
+      innerHeight: event?.view?.innerHeight || 0,
+    });
     setOpenState(item.title);
     setMouseLocale(null);
   };
-  const onContextMenu = () => {
+  const onContextMenu = (event: any) => {
+    setScreen({
+      innerWidth: event?.view?.innerWidth || 0,
+      innerHeight: event?.view?.innerHeight || 0,
+    });
     setOpenState(item.title);
   };
   const onDoubleClick = () => {
-    setOpendFolder((prev: TselectedIndexState) => {
-      const filtered = prev.filter((value) => value.title === item.title);
-      return [...filtered, { title: item.title, state: TASK_STATE.OPEN }];
-    });
+    onSetOpenedFolders();
+    setOpenState(null);
   };
   return (
     <>
@@ -58,7 +58,7 @@ export const HomeIcon = ({ item, index }: HomeIconProps) => {
       </ContextComponent>
     </>
   );
-};
+});
 
 const HomeIconBox = styled.div`
   display: flex;
