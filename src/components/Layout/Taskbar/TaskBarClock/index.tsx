@@ -4,7 +4,7 @@ import { styled } from "styled-components";
 import { FlexBox } from "styles";
 
 export const TaskBarClock = () => {
-  const [time, setTime] = useState(new Date());
+  const [time, setTime] = useState<Date>(new Date());
   useEffect(() => {
     const id = setInterval(() => {
       setTime(new Date());

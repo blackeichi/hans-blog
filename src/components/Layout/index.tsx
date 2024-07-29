@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { Taskbar } from "./Taskbar";
 import { useSetRecoilState } from "recoil";
-import { openState } from "$utils/atom";
+import { mouseLocaleState, openState } from "$utils/atom";
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -9,8 +9,17 @@ interface LayoutProps {
 
 export const Layout = ({ children }: LayoutProps) => {
   const setOpenState = useSetRecoilState(openState);
+  const setMouseLocale = useSetRecoilState(mouseLocaleState);
   return (
-    <Backgorund onClick={() => setOpenState(null)}>
+    <Backgorund
+      onClick={() => {
+        setOpenState(null);
+        setMouseLocale(null);
+      }}
+      onContextMenu={(event) => {
+        event.preventDefault();
+      }}
+    >
       {children}
       <Taskbar />
     </Backgorund>

@@ -33,6 +33,7 @@ const TaskbarBox = styled.div`
   display: flex;
   justify-content: space-between;
   font-family: "Retro";
+  z-index: 1000;
 `;
 const Box = styled(FlexBox)`
   gap: 3px;

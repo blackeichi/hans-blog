@@ -2,17 +2,16 @@ import { styled } from "styled-components";
 import { useState } from "react";
 import { useSetRecoilState } from "recoil";
 import { openState } from "$utils/atom";
-import { HandleTaskMenu } from "./handleTaskMenu";
+import { HandleOpenState } from "$components/Common/handleOpenState";
 
 const ID = "TaskMenuIcon";
 
 export const TaskMenuIcon = () => {
   const [open, setOpen] = useState<boolean>(false);
   const setOpenState = useSetRecoilState(openState);
-  const handleTaskMenu = (event: React.MouseEvent<HTMLElement, MouseEvent>) => {
+  const handleTaskMenu = (event: React.MouseEvent<HTMLElement>) => {
     event.stopPropagation();
     if (!open) {
-      setOpen(true);
       setOpenState(ID);
     } else {
       setOpenState(null);
@@ -20,7 +19,7 @@ export const TaskMenuIcon = () => {
   };
   return (
     <>
-      <HandleTaskMenu ID={ID} setOpen={setOpen} />
+      <HandleOpenState id={ID} isOpened={open} setIsOpened={setOpen} />
       <TaskMenuBox open={open}>
         <TapBox open={open} onClick={handleTaskMenu}>
           <WinIcon alt="window" src="/images/windowIcon.png" />
