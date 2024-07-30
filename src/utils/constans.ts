@@ -5,4 +5,5 @@ export const GLOBAL_COLOR = {
   gray: "#CECECF",
   darkGray: "#403F40",
   shadow: "#818184",
+  black: "#0B090A",
 };

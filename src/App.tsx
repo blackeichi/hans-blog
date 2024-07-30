@@ -92,33 +92,7 @@ table {
 	border-collapse: collapse;
 	border-spacing: 0;
 }
-body {
-  font-family: "NotoSans";
-}
-
-body.fontLoaded {
-  font-family: "NotoSans";
-}
 div {
   background-repeat : no-repeat;
 }
-#app {
-  background-color: #D6DEE8;
-  min-height: 100%;
-  min-width: 100%;
-}
-p,
-label {
-  font-family: "NotoSans";
-  line-height: 1.5em;
-}
-input:-webkit-autofill,
-input:-webkit-autofill:hover,
-input:-webkit-autofill:focus,
-input:-webkit-autofill:active {
-	-webkit-text-fill-color: #000;
-    -webkit-box-shadow: 0 0 0px 1000px inherit inset;
-    transition: background-color 5000s ease-in-out 0s;
-}
-
 `;
