@@ -1,0 +1,21 @@
+import { WindowComponent } from "$components/WindowComponent";
+import { folderState } from "$utils/atom";
+import { useDidMountEffect } from "$utils/hooks/useDidMountEffect";
+import { memo } from "react";
+import { useRecoilValue } from "recoil";
+
+export const FolderComponents = memo(() => {
+  const folders = useRecoilValue(folderState);
+  const url = new URL(window.location as any);
+  useDidMountEffect(() => {
+    url.searchParams.set("folder", JSON.stringify(folders));
+    window.history.pushState({}, "", url);
+  }, [folders]);
+  return (
+    <>
+      {folders.map((item, index) => (
+        <WindowComponent key={item.title} item={item} index={index + 10} />
+      ))}
+    </>
+  );
+});

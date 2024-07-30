@@ -18,7 +18,7 @@ interface WindowProps {
   index: number;
 }
 
-export const Window = ({ item, index }: WindowProps) => {
+export const WindowComponent = ({ item, index }: WindowProps) => {
   const setFolderState = useSetRecoilState(folderState);
   const onClick = () => {
     setFolderState((prev) => [
