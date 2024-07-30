@@ -2,7 +2,16 @@ import { GLOBAL_COLOR } from "$utils/constans";
 import { motion } from "framer-motion";
 import { styled } from "styled-components";
 
-export const IconContextMenu = () => {
+export const IconContextMenu = ({
+  onSetOpenedFolders,
+  setOpenState,
+  setMouseLocale,
+}: any) => {
+  const onClickEvent = () => {
+    onSetOpenedFolders();
+    setOpenState(null);
+    setMouseLocale(null);
+  };
   return (
     <IconContextMenuBox>
       <ContextMenu
@@ -14,6 +23,7 @@ export const IconContextMenu = () => {
           fontWeight: "bold",
           textDecoration: "underline",
         }}
+        onClick={onClickEvent}
       >
         Open
       </ContextMenu>

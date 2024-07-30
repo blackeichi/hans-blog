@@ -1,24 +1,34 @@
-import { memo, useState } from "react";
+import { useState } from "react";
 import { styled } from "styled-components";
-import { mouseLocaleState, openState } from "$utils/atom";
-import { useSetRecoilState } from "recoil";
 import { HandleOpenState } from "$components/Common/handleOpenState";
 import { ContextComponent } from "$components/ContextComponent.js";
 import { IconContextMenu } from "./IconContextMenu";
 import { SetOpenedFolders } from "$routes/Home/actions";
+
+type ISize = {
+  innerWidth: number;
+  innerHeight: number;
+};
 
 interface HomeIconProps {
   item: {
     title: string;
     icon: string;
   };
+  screen: ISize;
+  setScreen: React.Dispatch<React.SetStateAction<ISize>>;
+  setOpenState: Function;
+  setMouseLocale: Function;
 }
-export const HomeIcon = memo(({ item }: HomeIconProps) => {
-  const [screen, setScreen] = useState({ innerWidth: 0, innerHeight: 0 });
-  const onSetOpenedFolders: Function = SetOpenedFolders([item.title], screen);
+export const HomeIcon = ({
+  item,
+  screen,
+  setScreen,
+  setOpenState,
+  setMouseLocale,
+}: HomeIconProps) => {
   const [isSelected, setIsSelected] = useState<boolean>(false);
-  const setOpenState = useSetRecoilState(openState);
-  const setMouseLocale = useSetRecoilState(mouseLocaleState);
+  const onSetOpenedFolders: Function = SetOpenedFolders([item.title], screen);
   const onClick = (event: any) => {
     event.stopPropagation();
     setScreen({
@@ -46,7 +56,16 @@ export const HomeIcon = memo(({ item }: HomeIconProps) => {
         isOpened={isSelected}
         setIsOpened={setIsSelected}
       />
-      <ContextComponent contextMenu={<IconContextMenu />} id={item.title}>
+      <ContextComponent
+        contextMenu={
+          <IconContextMenu
+            onSetOpenedFolders={onSetOpenedFolders}
+            setOpenState={setOpenState}
+            setMouseLocale={setMouseLocale}
+          />
+        }
+        id={item.title}
+      >
         <HomeIconBox
           onClick={onClick}
           onContextMenu={onContextMenu}
@@ -58,7 +77,7 @@ export const HomeIcon = memo(({ item }: HomeIconProps) => {
       </ContextComponent>
     </>
   );
-});
+};
 
 const HomeIconBox = styled.div`
   display: flex;

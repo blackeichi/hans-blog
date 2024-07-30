@@ -1,12 +1,12 @@
 import { useState } from "react";
-import { HomeIcon } from "$components/HomeIcon";
 import { styled } from "styled-components";
 import { TASK_ICONS } from "./constants";
 import { useRecoilValue, useSetRecoilState } from "recoil";
-import { folderState } from "$utils/atom";
+import { folderState, mouseLocaleState, openState } from "$utils/atom";
 import { useSearchParams } from "react-router-dom";
 import { useEffect } from "react";
 import { FolderComponents } from "./Components/FolderComponents";
+import { HomeIcon } from "./Components/HomeIcon";
 
 const withHome = (Component: any) => {
   return () => {
@@ -25,19 +25,22 @@ const withHome = (Component: any) => {
 };
 
 const Home = withHome(() => {
-  const folders = useRecoilValue(folderState);
-  const [_, setSearchParams] = useSearchParams();
-  useEffect(() => {
-    setSearchParams({
-      folder: `${JSON.stringify(folders)}`,
-    });
-  }, [folders]);
+  const [screen, setScreen] = useState({ innerWidth: 0, innerHeight: 0 });
+  const setOpenState = useSetRecoilState(openState);
+  const setMouseLocale = useSetRecoilState(mouseLocaleState);
   return (
     <HomeContainer>
       {TASK_ICONS.map((item) => (
-        <HomeIcon key={item.title} item={item} />
+        <HomeIcon
+          key={item.title}
+          item={item}
+          screen={screen}
+          setScreen={setScreen}
+          setOpenState={setOpenState}
+          setMouseLocale={setMouseLocale}
+        />
       ))}
-      {<FolderComponents folders={folders} />}
+      {<FolderComponents />}
     </HomeContainer>
   );
 });

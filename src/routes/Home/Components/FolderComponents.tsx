@@ -1,11 +1,17 @@
 import { Window } from "$components/Window";
-import { TselectedIndexState } from "$utils/atom";
+import { folderState } from "$utils/atom";
+import { memo, useEffect } from "react";
+import { useSearchParams } from "react-router-dom";
+import { useRecoilValue } from "recoil";
 
-interface FolderComponentsProps {
-  folders: TselectedIndexState;
-}
-
-export const FolderComponents = ({ folders }: FolderComponentsProps) => {
+export const FolderComponents = memo(() => {
+  const folders = useRecoilValue(folderState);
+  const [_, setSearchParams] = useSearchParams();
+  useEffect(() => {
+    setSearchParams({
+      folder: `${JSON.stringify(folders)}`,
+    });
+  }, [folders]);
   return (
     <>
       {folders.map((item, index) => (
@@ -13,4 +19,4 @@ export const FolderComponents = ({ folders }: FolderComponentsProps) => {
       ))}
     </>
   );
-};
+});
