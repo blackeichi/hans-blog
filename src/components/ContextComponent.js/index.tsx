@@ -1,4 +1,4 @@
-import { mouseLocaleState, openState } from "$utils/atom";
+import { mouseLocaleState, selectedState } from "$utils/atom";
 import { useSetRecoilState } from "recoil";
 import { styled } from "styled-components";
 import { ContextContentsBox } from "./ContextContentsBox";
@@ -16,12 +16,12 @@ export const ContextComponent = ({
   id,
   styles = {},
 }: ContextComponentProps) => {
-  const setOpenState = useSetRecoilState(openState);
+  const setSelected = useSetRecoilState(selectedState);
   const setMouseLocale = useSetRecoilState(mouseLocaleState);
   const onOpenContextMenu = (event: React.MouseEvent<HTMLElement>) => {
     event.preventDefault();
     if (contextMenu) {
-      setOpenState(id);
+      setSelected(id);
       setMouseLocale({
         x: event.clientX,
         y: event.clientY,

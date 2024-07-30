@@ -1,4 +1,4 @@
-import { openState } from "$utils/atom";
+import { selectedState } from "$utils/atom";
 import { useEffect } from "react";
 import { useRecoilValue } from "recoil";
 
@@ -13,13 +13,13 @@ export const HandleOpenState = ({
   isOpened,
   setIsOpened,
 }: HandleOpenStateProps) => {
-  const open = useRecoilValue(openState);
+  const selected = useRecoilValue(selectedState);
   useEffect(() => {
-    if (isOpened && (!open || open !== id)) {
+    if (isOpened && (!selected || selected !== id)) {
       setIsOpened(false);
-    } else if (!isOpened && open === id) {
+    } else if (!isOpened && selected === id) {
       setIsOpened(true);
     }
-  }, [open, isOpened]);
+  }, [selected]);
   return <></>;
 };

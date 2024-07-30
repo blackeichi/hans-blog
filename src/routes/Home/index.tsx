@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { styled } from "styled-components";
 import { TASK_ICONS } from "./constants";
-import { useRecoilValue, useSetRecoilState } from "recoil";
-import { folderState, mouseLocaleState, openState } from "$utils/atom";
+import { useSetRecoilState } from "recoil";
+import { folderState, mouseLocaleState, selectedState } from "$utils/atom";
 import { useSearchParams } from "react-router-dom";
 import { useEffect } from "react";
 import { FolderComponents } from "./Components/FolderComponents";
@@ -25,22 +25,19 @@ const withHome = (Component: any) => {
 };
 
 const Home = withHome(() => {
-  const [screen, setScreen] = useState({ innerWidth: 0, innerHeight: 0 });
-  const setOpenState = useSetRecoilState(openState);
+  const setSelected = useSetRecoilState(selectedState);
   const setMouseLocale = useSetRecoilState(mouseLocaleState);
   return (
-    <HomeContainer>
+    <HomeContainer tabIndex={0} onKeyDown={(event) => console.log(event)}>
       {TASK_ICONS.map((item) => (
         <HomeIcon
           key={item.title}
           item={item}
-          screen={screen}
-          setScreen={setScreen}
-          setOpenState={setOpenState}
+          setSelected={setSelected}
           setMouseLocale={setMouseLocale}
         />
       ))}
-      {<FolderComponents />}
+      <FolderComponents />
     </HomeContainer>
   );
 });
@@ -52,4 +49,7 @@ const HomeContainer = styled.div`
   flex-direction: column;
   gap: 30px;
   padding: 15px 0;
+  width: 100%;
+  height: 100%;
+  outline: none;
 `;

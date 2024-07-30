@@ -1,20 +1,20 @@
 import { styled } from "styled-components";
 import { useState } from "react";
 import { useSetRecoilState } from "recoil";
-import { openState } from "$utils/atom";
+import { selectedState } from "$utils/atom";
 import { HandleOpenState } from "$components/Common/handleOpenState";
 
 const ID = "TaskMenuIcon";
 
 export const TaskMenuIcon = () => {
   const [open, setOpen] = useState<boolean>(false);
-  const setOpenState = useSetRecoilState(openState);
+  const setSelected = useSetRecoilState(selectedState);
   const handleTaskMenu = (event: React.MouseEvent<HTMLElement>) => {
     event.stopPropagation();
     if (!open) {
-      setOpenState(ID);
+      setSelected(ID);
     } else {
-      setOpenState(null);
+      setSelected(null);
     }
   };
   return (

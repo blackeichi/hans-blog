@@ -1,4 +1,4 @@
-import { mouseLocaleState, openState } from "$utils/atom";
+import { mouseLocaleState, selectedState } from "$utils/atom";
 import { useRecoilValue } from "recoil";
 import { ContextMenuBox } from "./style";
 
@@ -11,11 +11,11 @@ export const ContextContentsBox = ({
   contextMenu,
   id,
 }: ContextContentsBoxProps) => {
-  const open = useRecoilValue(openState);
+  const selected = useRecoilValue(selectedState);
   const mouseLocale = useRecoilValue(mouseLocaleState);
   return (
     <>
-      {open && mouseLocale && id === open && (
+      {selected && mouseLocale && id === selected && (
         <ContextMenuBox
           onClick={(event) => event.stopPropagation()}
           mouselocale={mouseLocale}

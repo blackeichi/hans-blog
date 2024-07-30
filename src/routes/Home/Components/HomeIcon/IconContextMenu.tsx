@@ -4,12 +4,12 @@ import { styled } from "styled-components";
 
 export const IconContextMenu = ({
   onSetOpenedFolders,
-  setOpenState,
+  setSelected,
   setMouseLocale,
 }: any) => {
   const onClickEvent = () => {
     onSetOpenedFolders();
-    setOpenState(null);
+    setSelected(null);
     setMouseLocale(null);
   };
   return (

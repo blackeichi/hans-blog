@@ -4,50 +4,44 @@ import { HandleOpenState } from "$components/Common/handleOpenState";
 import { ContextComponent } from "$components/ContextComponent.js";
 import { IconContextMenu } from "./IconContextMenu";
 import { SetOpenedFolders } from "$routes/Home/actions";
-
-type ISize = {
-  innerWidth: number;
-  innerHeight: number;
-};
+import { useSetRecoilState } from "recoil";
+import { sizeState } from "$utils/atom";
 
 interface HomeIconProps {
   item: {
     title: string;
     icon: string;
   };
-  screen: ISize;
-  setScreen: React.Dispatch<React.SetStateAction<ISize>>;
-  setOpenState: Function;
+  setSelected: Function;
   setMouseLocale: Function;
 }
 export const HomeIcon = ({
   item,
-  screen,
-  setScreen,
-  setOpenState,
+  setSelected,
   setMouseLocale,
 }: HomeIconProps) => {
+  const setSize = useSetRecoilState(sizeState);
   const [isSelected, setIsSelected] = useState<boolean>(false);
-  const onSetOpenedFolders: Function = SetOpenedFolders([item.title], screen);
+  const onSetOpenedFolders: Function = SetOpenedFolders([item.title]);
   const onClick = (event: any) => {
     event.stopPropagation();
-    setScreen({
-      innerWidth: event?.view?.innerWidth || 0,
-      innerHeight: event?.view?.innerHeight || 0,
+    setSize({
+      width: event?.view?.innerWidth || 0,
+      height: event?.view?.innerHeight || 0,
     });
-    setOpenState(item.title);
+    setSelected(item.title);
     setMouseLocale(null);
   };
   const onContextMenu = (event: any) => {
-    setScreen({
-      innerWidth: event?.view?.innerWidth || 0,
-      innerHeight: event?.view?.innerHeight || 0,
+    setSize({
+      width: event?.view?.innerWidth || 0,
+      height: event?.view?.innerHeight || 0,
     });
-    setOpenState(item.title);
+    setSelected(item.title);
   };
   const onDoubleClick = () => {
     onSetOpenedFolders();
-    setOpenState(null);
+    setSelected(null);
   };
   return (
     <>
@@ -60,7 +54,7 @@ export const HomeIcon = ({
         contextMenu={
           <IconContextMenu
             onSetOpenedFolders={onSetOpenedFolders}
-            setOpenState={setOpenState}
+            setSelected={setSelected}
             setMouseLocale={setMouseLocale}
           />
         }
