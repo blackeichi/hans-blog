@@ -15,7 +15,7 @@ export const ContextContentsBox = ({
   const mouseLocale = useRecoilValue(mouseLocaleState);
   return (
     <>
-      {selected && mouseLocale && id === selected && (
+      {selected && mouseLocale && selected.includes(id) && (
         <ContextMenuBox
           onClick={(event) => event.stopPropagation()}
           mouselocale={mouseLocale}

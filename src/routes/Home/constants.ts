@@ -5,10 +5,15 @@ export const TASK_LIST = {
   Search: "Search",
 };
 export const TASK_ICONS = [
-  { title: TASK_LIST.MyComputer, icon: "/images/myComputer.png" },
-  { title: TASK_LIST.Documents, icon: "/images/postsFolder.png" },
-  { title: TASK_LIST.Tags, icon: "/images/tagsFolder.png" },
-  { title: TASK_LIST.Search, icon: "/images/search.png" },
+  { title: TASK_LIST.MyComputer, icon: "/images/myComputer.png", x: 20, y: 15 },
+  {
+    title: TASK_LIST.Documents,
+    icon: "/images/postsFolder.png",
+    x: 20,
+    y: 100,
+  },
+  { title: TASK_LIST.Tags, icon: "/images/tagsFolder.png", x: 20, y: 185 },
+  { title: TASK_LIST.Search, icon: "/images/search.png", x: 20, y: 270 },
 ];
 
 export const TASK_STATE = {

@@ -15,9 +15,9 @@ export const HandleOpenState = ({
 }: HandleOpenStateProps) => {
   const selected = useRecoilValue(selectedState);
   useEffect(() => {
-    if (isOpened && (!selected || selected !== id)) {
+    if (isOpened && (!selected || !selected.includes(id))) {
       setIsOpened(false);
-    } else if (!isOpened && selected === id) {
+    } else if (!isOpened && selected?.includes(id)) {
       setIsOpened(true);
     }
   }, [selected]);

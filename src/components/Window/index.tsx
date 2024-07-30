@@ -66,7 +66,7 @@ const WindowBox = styled.div<{
   };
   index: number;
 }>`
-  position: fixed;
+  position: absolute;
   left: ${(props) => `${props.item.x}px`};
   top: ${(props) => `${props.item.y}px`};
   width: ${(props) => `${props.item.width}px`};

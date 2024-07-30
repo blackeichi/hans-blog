@@ -15,7 +15,7 @@ export const FolderComponents = memo(() => {
   return (
     <>
       {folders.map((item, index) => (
-        <Window key={item.title} item={item} index={index} />
+        <Window key={item.title} item={item} index={index + 10} />
       ))}
     </>
   );

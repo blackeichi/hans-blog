@@ -21,7 +21,7 @@ export const ContextComponent = ({
   const onOpenContextMenu = (event: React.MouseEvent<HTMLElement>) => {
     event.preventDefault();
     if (contextMenu) {
-      setSelected(id);
+      setSelected([id]);
       setMouseLocale({
         x: event.clientX,
         y: event.clientY,

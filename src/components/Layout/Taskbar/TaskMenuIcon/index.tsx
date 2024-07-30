@@ -12,7 +12,7 @@ export const TaskMenuIcon = () => {
   const handleTaskMenu = (event: React.MouseEvent<HTMLElement>) => {
     event.stopPropagation();
     if (!open) {
-      setSelected(ID);
+      setSelected([ID]);
     } else {
       setSelected(null);
     }

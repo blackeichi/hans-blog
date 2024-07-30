@@ -12,7 +12,7 @@ export type TSizeState = {
   width: number;
   height: number;
 };
-export const selectedState = atom<null | string>({
+export const selectedState = atom<null | string[]>({
   key: "selectedState",
   default: null,
 });
