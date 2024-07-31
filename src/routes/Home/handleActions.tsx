@@ -29,12 +29,12 @@ export const HandleActions = () => {
           }
         } else if (action.value === KEY_EVENTS.ARROW_DOWN) {
           if (!selected || selected.length === 0) {
-            setSelected([TASK_LIST.MyComputer]);
+            setSelected([TASK_LIST.Profile]);
           } else {
             const list = Object.keys(TASK_LIST);
             const index = list.indexOf(selected[0]);
             if (index === list.length - 1) {
-              setSelected([TASK_LIST.MyComputer]);
+              setSelected([TASK_LIST.Profile]);
             } else {
               setSelected([TASK_LIST[list[index + 1]]]);
             }

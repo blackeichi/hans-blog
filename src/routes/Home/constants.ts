@@ -1,15 +1,15 @@
-type TASK_LIST = {
+type TTASK_LIST = {
   [key: string]: string;
 };
 
-export const TASK_LIST: TASK_LIST = {
-  MyComputer: "MyComputer",
+export const TASK_LIST: TTASK_LIST = {
+  Profile: "Profile",
   Documents: "Documents",
   Tags: "Tags",
   Search: "Search",
 };
 export const TASK_ICONS = [
-  { title: TASK_LIST.MyComputer, icon: "/images/myComputer.png", x: 20, y: 15 },
+  { title: TASK_LIST.Profile, icon: "/images/myComputer.png", x: 20, y: 15 },
   {
     title: TASK_LIST.Documents,
     icon: "/images/postsFolder.png",

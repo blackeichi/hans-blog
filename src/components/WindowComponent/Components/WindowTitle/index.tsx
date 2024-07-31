@@ -5,15 +5,16 @@ import {
   IconBox,
   MaximizationIcon,
   MinimalizationIcon,
+  Title,
   UnMaximizationBox,
   UnMaximizationIcom,
   WindowTitleBox,
   WindowTitleExtends,
-} from "../styles";
-import { ClickButtonEvent } from "./ClickButtonEvent";
+} from "../../styles";
 import { TDragState, TFolder, TFolderList } from "$utils/types";
-import { TASK_BAR_HEIGHT } from "$utils/constans";
-import { TASK_STATE } from "$routes/Home/constants";
+import { GLOBAL_COLOR, TASK_BAR_HEIGHT } from "$utils/constans";
+import { TASK_LIST, TASK_STATE } from "$routes/Home/constants";
+import { ClickButtonEvent } from "./ClickButtonEvent";
 
 interface IWindowTitle {
   windowState: TFolder;
@@ -68,6 +69,13 @@ export const WindowTitle = ({
       onChangeFolderState();
     }
   };
+  const onMaximization = () => {
+    const newFolderState = {
+      ...windowState,
+      isMax: windowState.isMax ? false : true,
+    };
+    onChangeFolderState(newFolderState);
+  };
   const WindowBtns = [
     {
       icon: <MinimalizationIcon />,
@@ -97,13 +105,7 @@ export const WindowTitle = ({
       ) : (
         <MaximizationIcon />
       ),
-      action: () => {
-        const newFolderState = {
-          ...windowState,
-          isMax: windowState.isMax ? false : true,
-        };
-        onChangeFolderState(newFolderState);
-      },
+      action: () => onMaximization(),
     },
     {
       icon: <CloseIcon>x</CloseIcon>,
@@ -117,13 +119,16 @@ export const WindowTitle = ({
   ];
   return (
     <WindowTitleBox
+      backgroundColor={
+        item.title === TASK_LIST.Profile ? "rgba(0,0,0,0.5)" : GLOBAL_COLOR.blue
+      }
       onMouseDown={onMoveStart}
       onMouseMove={dragStart ? onMove : undefined}
       onMouseLeave={onMoveEnd}
       onMouseUp={onMoveEnd}
     >
       {dragStart && <WindowTitleExtends />}
-      {windowState.title}
+      <Title onDoubleClick={onMaximization}>{windowState.title}</Title>
       <FlexBox
         style={{ zIndex: 1 }}
         onClick={(event) => event.stopPropagation()}

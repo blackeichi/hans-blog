@@ -1,6 +1,5 @@
 import { motion } from "framer-motion";
 import { styled } from "styled-components";
-import { FlexBox } from "styles";
 
 export const WindowBox = styled(motion.div)<{
   item: {
@@ -19,10 +18,21 @@ export const WindowBox = styled(motion.div)<{
   height: ${(props) => (props.item.isMax ? "100%" : `${props.item.height}px`)};
   z-index: ${(props) => props.index};
   background-color: ${(props) => props.theme.gray};
-  border-top: 4px solid ${(props) => props.theme.lightGray};
-  border-left: 4px solid ${(props) => props.theme.lightGray};
-  border-bottom: 4px solid ${(props) => props.theme.shadow};
-  border-right: 4px solid ${(props) => props.theme.shadow};
+  border-top: ${(props) =>
+    props.item.isMax ? "none" : `4px solid ${props.theme.lightGray}`};
+  border-left: ${(props) =>
+    props.item.isMax ? "none" : `4px solid ${props.theme.lightGray}`};
+  border-bottom: ${(props) =>
+    props.item.isMax ? "none" : `4px solid ${props.theme.shadow}`};
+  border-right: ${(props) =>
+    props.item.isMax ? "none" : `4px solid ${props.theme.shadow}`};
+`;
+
+export const WindowContentBox = styled.div`
+  width: 100%;
+  height: calc(100% - 65px);
+  padding: 10px;
+  padding-bottom: 5px;
 `;
 
 export const ResizeWindowBox = styled.div`
@@ -38,18 +48,26 @@ export const ResizeWindowBox = styled.div`
   cursor: nwse-resize;
 `;
 
-export const WindowTitleBox = styled.div`
+export const WindowTitleBox = styled.div<{ backgroundColor: string }>`
   width: 100%;
   height: 30px;
-  background-color: ${(props) => props.theme.blue};
+  background-color: ${(props) => props.backgroundColor};
   color: white;
-  font-family: "Retro";
-  font-size: 10px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0 5px;
+  padding-right: 5px;
   position: relative;
+  font-family: "Retro";
+  font-size: 10px;
+`;
+export const Title = styled.div`
+  padding-left: 5px;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  z-index: 1;
 `;
 export const WindowTitleExtends = styled.div`
   position: absolute;
@@ -58,6 +76,7 @@ export const WindowTitleExtends = styled.div`
   width: calc(100% + 1000px);
   height: calc(100% + 1000px);
 `;
+
 export const IconBox = styled.div`
   width: 16px;
   height: 16px;
@@ -103,29 +122,8 @@ export const CloseIcon = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-`;
-
-export const WindowContentBox = styled.div`
-  width: 100%;
-  height: calc(100% - 65px);
-  padding: 10px;
-  padding-bottom: 5px;
-`;
-export const Content = styled.div`
-  width: 100%;
-  height: 100%;
-  background-color: white;
-  border-top: 1px solid ${(props) => props.theme.darkGray};
-  border-left: 1px solid ${(props) => props.theme.darkGray};
-  outline: 4px solid ${(props) => props.theme.shadow};
-  overflow-x: scroll;
-`;
-export const PageBtnBox = styled(FlexBox)`
-  padding: 5px 10px;
-  color: ${(props) => props.theme.shadow};
-  gap: 10px;
-`;
-export const TempBox = styled.div`
-  width: 100%;
-  height: 1000px;
+  font-weight: bold;
+  font-size: 16px;
+  padding-bottom: 2px;
+  padding-right: 1px;
 `;

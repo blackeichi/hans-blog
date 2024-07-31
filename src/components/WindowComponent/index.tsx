@@ -1,13 +1,12 @@
 import { useState, useEffect } from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCaretRight, faCaretLeft } from "@fortawesome/free-solid-svg-icons";
-import { Content, PageBtnBox, TempBox, WindowContentBox } from "./styles";
 import { WindowOverlay } from "./Components/WindowOverlay";
 import { TFolder } from "$utils/types";
-import { WindowTitle } from "./Components/WindowTitle";
 import { folderState } from "$utils/atom";
 import { useSetRecoilState } from "recoil";
-import { TASK_STATE } from "$routes/Home/constants";
+import { TASK_LIST, TASK_STATE } from "$routes/Home/constants";
+import { ProfileContent } from "./Components/Contents/ProfileContent";
+import { WindowContent } from "./Components/Contents/WindowContent";
+import { WindowTitle } from "./Components/WindowTitle";
 
 interface WindowProps {
   item: TFolder;
@@ -42,15 +41,11 @@ export const WindowComponent = ({ item, index }: WindowProps) => {
         onChangeFolderState={onChangeFolderState}
         index={index}
       />
-      <WindowContentBox>
-        <Content>
-          <TempBox />
-        </Content>
-      </WindowContentBox>
-      <PageBtnBox>
-        <FontAwesomeIcon fontSize="25px" icon={faCaretLeft} />
-        <FontAwesomeIcon fontSize="25px" icon={faCaretRight} />
-      </PageBtnBox>
+      {item.title === TASK_LIST.Profile ? (
+        <ProfileContent />
+      ) : (
+        <WindowContent />
+      )}
     </WindowOverlay>
   );
 };
