@@ -1,4 +1,9 @@
-type TChangeEvent = (width: number, height: number) => void;
+type TChangeEvent = (
+  width: number,
+  height: number,
+  maxWidth: number,
+  maxHeight: number
+) => void;
 
 export default function boxResizeEvent(
   onDragChange: TChangeEvent,
@@ -10,11 +15,21 @@ export default function boxResizeEvent(
       const mouseMoveHandler = (moveEvent: any) => {
         const deltaX = moveEvent.screenX - clickEvent.screenX;
         const deltaY = moveEvent.screenY - clickEvent.screenY;
-        onDragChange(deltaX, deltaY);
+        onDragChange(
+          deltaX,
+          deltaY,
+          moveEvent.view.innerWidth,
+          moveEvent.view.innerHeight
+        );
       };
       const mouseUpHandler = (event: any) => {
         event.stopPropagation();
-        mouseUpEvent(clickEvent.target.offsetLeft, clickEvent.target.offsetTop);
+        mouseUpEvent(
+          clickEvent.target.offsetLeft,
+          clickEvent.target.offsetTop,
+          clickEvent.view.innerWidth,
+          clickEvent.view.innerHeight
+        );
         document.removeEventListener("mousemove", mouseMoveHandler);
       };
       document.addEventListener("mousemove", mouseMoveHandler);

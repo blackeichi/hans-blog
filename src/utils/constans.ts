@@ -18,3 +18,5 @@ export const KEY_EVENTS = {
 };
 
 export const TASK_BAR_HEIGHT = 35;
+export const FOLDER_MIN_WIDTH = 200;
+export const FOLDER_MIN_HEIGHT = 150;

@@ -76,7 +76,6 @@ export const WindowTitle = ({
           ...windowState,
           state: TASK_STATE.HIDE,
         };
-        setWindowState(newFolderState);
         onChangeFolderState(newFolderState);
       },
     },
@@ -103,7 +102,6 @@ export const WindowTitle = ({
           ...windowState,
           isMax: windowState.isMax ? false : true,
         };
-        setWindowState(newFolderState);
         onChangeFolderState(newFolderState);
       },
     },

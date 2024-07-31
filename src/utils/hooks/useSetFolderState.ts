@@ -1,5 +1,6 @@
 import { DEFAULT_SIZE, TASK_STATE } from "$routes/Home/constants";
 import { folderState, selectedState, sizeState } from "$utils/atom";
+import { TASK_BAR_HEIGHT } from "$utils/constans";
 import { TFolderList } from "$utils/types";
 import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 
@@ -46,7 +47,8 @@ export const useSetFolderState = () => {
                         : lastFolder.x + ADDITIONAL_SIZE
                       : size.width / 2 - DEFAULT_SIZE / 2,
                     y: lastFolder
-                      ? lastFolder.y + lastFolder.height >= size.height
+                      ? lastFolder.y + lastFolder.height >=
+                        size.height - TASK_BAR_HEIGHT
                         ? lastFolder.y - ADDITIONAL_SIZE
                         : lastFolder.y + ADDITIONAL_SIZE
                       : size.height / 2 - DEFAULT_SIZE / 2,

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCaretRight, faCaretLeft } from "@fortawesome/free-solid-svg-icons";
 import { Content, PageBtnBox, TempBox, WindowContentBox } from "./styles";
@@ -7,6 +7,7 @@ import { TFolder } from "$utils/types";
 import { WindowTitle } from "./Components/WindowTitle";
 import { folderState } from "$utils/atom";
 import { useSetRecoilState } from "recoil";
+import { TASK_STATE } from "$routes/Home/constants";
 
 interface WindowProps {
   item: TFolder;
@@ -15,12 +16,15 @@ interface WindowProps {
 
 export const WindowComponent = ({ item, index }: WindowProps) => {
   const [windowState, setWindowState] = useState<TFolder>(item);
+  useEffect(() => {
+    setWindowState(item);
+  }, [item]);
   const setFolderState = useSetRecoilState(folderState);
   const onChangeFolderState = (value?: TFolder) => {
     setFolderState((prev) => [
       ...prev.slice(0, index),
       ...prev.slice(index + 1, prev.length),
-      value ? value : windowState,
+      { ...(value || { ...windowState, state: TASK_STATE.OPEN }) },
     ]);
   };
   return (
