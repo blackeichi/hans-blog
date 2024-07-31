@@ -83,7 +83,6 @@ export const HomeOverly = ({
       taskbarHeight={TASK_BAR_HEIGHT}
       onMouseDown={onDragStart}
       onMouseMove={dragStart ? onDrag : undefined}
-      onMouseLeave={onDragEnd}
       onClick={
         isDraged
           ? (event) => {
@@ -97,6 +96,7 @@ export const HomeOverly = ({
         setMouseLocale(null);
       }}
       tabIndex={0}
+      autoFocus
       onKeyDown={handleKeyDown}
     >
       {children}
