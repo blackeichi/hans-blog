@@ -1,16 +1,21 @@
-import { useState } from "react";
 import { useSetRecoilState } from "recoil";
-import { folderState, mouseLocaleState, selectedState } from "$utils/atom";
-import { useLocation, useSearchParams } from "react-router-dom";
+import {
+  actionState,
+  folderState,
+  mouseLocaleState,
+  selectedState,
+  sizeState,
+} from "$utils/atom";
+import { useLocation } from "react-router-dom";
 import { useEffect } from "react";
 import { FolderComponents } from "./Components/FolderComponents";
 import { TASK_ICONS } from "./constants";
 import { HomeIcon } from "./Components/HomeIcon";
 import { HomeOverly } from "./Components/HomeOverlay/HomeOverlay";
+import { HandleActions } from "./handleActions";
 
 const withHome = (Component: any) => {
   return () => {
-    const [ready, setReady] = useState(false);
     const setFolderState = useSetRecoilState(folderState);
     const { search } = useLocation();
     const searchData = Object.fromEntries(new URLSearchParams(search));
@@ -21,30 +26,36 @@ const withHome = (Component: any) => {
       if (folderData) {
         setFolderState(folderData);
       }
-      setReady(true);
     }, []);
-    return ready ? <Component /> : <></>;
+    return <Component />;
   };
 };
 
 const Home = withHome(() => {
   const setSelected = useSetRecoilState(selectedState);
   const setMouseLocale = useSetRecoilState(mouseLocaleState);
+  const setAction = useSetRecoilState(actionState);
+  const setSize = useSetRecoilState(sizeState);
   return (
     <>
-      {
-        <HomeOverly setSelected={setSelected}>
-          {TASK_ICONS.map((item) => (
-            <HomeIcon
-              key={item.title}
-              item={item}
-              setSelected={setSelected}
-              setMouseLocale={setMouseLocale}
-            />
-          ))}
-          <FolderComponents />
-        </HomeOverly>
-      }
+      <HandleActions />
+      <HomeOverly
+        setSize={setSize}
+        setSelected={setSelected}
+        setAction={setAction}
+      >
+        {TASK_ICONS.map((item) => (
+          <HomeIcon
+            key={item.title}
+            item={item}
+            setSelected={setSelected}
+            setMouseLocale={setMouseLocale}
+            setAction={setAction}
+            setSize={setSize}
+          />
+        ))}
+        <FolderComponents />
+      </HomeOverly>
     </>
   );
 });

@@ -1,10 +1,13 @@
 import { useState } from "react";
-import { TASK_ICONS } from "$routes/Home/constants";
+import { ACTION_TYPES, TASK_ICONS } from "$routes/Home/constants";
 import { styled } from "styled-components";
+import { TActionState, TSelectedState, TSizeState } from "$utils/atom";
 
 interface IHomeOverly {
   children: React.ReactNode;
-  setSelected: React.Dispatch<React.SetStateAction<null | string[]>>;
+  setSelected: React.Dispatch<React.SetStateAction<TSelectedState>>;
+  setAction: React.Dispatch<React.SetStateAction<TActionState>>;
+  setSize: React.Dispatch<React.SetStateAction<TSizeState>>;
 }
 type TDragState = {
   startX: number;
@@ -13,11 +16,20 @@ type TDragState = {
   endY?: number | undefined;
 } | null;
 
-export const HomeOverly = ({ children, setSelected }: IHomeOverly) => {
+export const HomeOverly = ({
+  children,
+  setSelected,
+  setAction,
+  setSize,
+}: IHomeOverly) => {
   const [dragStart, setDragStart] = useState(false);
   const [dragState, setDragState] = useState<TDragState>(null);
-  const onDragStart = (event: React.MouseEvent) => {
+  const onDragStart = (event: any) => {
     setDragStart(true);
+    setSize({
+      width: event?.view?.innerWidth || 0,
+      height: event?.view?.innerHeight || 0,
+    });
     setDragState({
       startX: event.clientX,
       startY: event.clientY,
@@ -55,6 +67,12 @@ export const HomeOverly = ({ children, setSelected }: IHomeOverly) => {
     setDragState(null);
   };
   const isDraged = dragStart && dragState?.endX && dragState?.endY;
+  const handleKeyDown = (event: React.KeyboardEvent) => {
+    setAction({
+      type: ACTION_TYPES.HOME_KEY_DOWN,
+      value: event.key,
+    });
+  };
   return (
     <HomeContainer
       onMouseDown={onDragStart}
@@ -67,8 +85,8 @@ export const HomeOverly = ({ children, setSelected }: IHomeOverly) => {
             }
           : onDragEnd
       }
-      // tabIndex={0}
-      // onKeyDown={(event) => console.log(event)}
+      tabIndex={0}
+      onKeyDown={handleKeyDown}
     >
       {children}
       {dragStart && dragState ? (

@@ -5,6 +5,7 @@ import { FlexBox } from "styles";
 import { ClickButtonEvent } from "./ClickButtonEvent";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCaretRight, faCaretLeft } from "@fortawesome/free-solid-svg-icons";
+import { motion } from "framer-motion";
 
 interface WindowProps {
   item: {
@@ -20,7 +21,8 @@ interface WindowProps {
 
 export const WindowComponent = ({ item, index }: WindowProps) => {
   const setFolderState = useSetRecoilState(folderState);
-  const onClick = () => {
+  const onClick = (event: React.MouseEvent) => {
+    event.stopPropagation();
     setFolderState((prev) => [
       ...prev.slice(0, index),
       ...prev.slice(index + 1, prev.length),
@@ -33,7 +35,22 @@ export const WindowComponent = ({ item, index }: WindowProps) => {
     <CloseIcon>x</CloseIcon>,
   ];
   return (
-    <WindowBox onClick={onClick} item={item} index={index}>
+    <WindowBox
+      tabIndex={0}
+      onKeyDown={(event) => {
+        event.stopPropagation();
+      }}
+      onMouseDown={(event) => {
+        event.stopPropagation();
+      }}
+      onClick={onClick}
+      item={item}
+      // z-index 값 높이기
+      index={index + 10}
+      initial={{ scale: 0.9 }}
+      animate={{ scale: 1 }}
+      exit={{ scale: 0.9 }}
+    >
       <WindowTitle>
         {item.title}
         <FlexBox onClick={(event) => event.stopPropagation()}>
@@ -57,7 +74,7 @@ export const WindowComponent = ({ item, index }: WindowProps) => {
   );
 };
 
-const WindowBox = styled.div<{
+const WindowBox = styled(motion.div)<{
   item: {
     x: number;
     y: number;

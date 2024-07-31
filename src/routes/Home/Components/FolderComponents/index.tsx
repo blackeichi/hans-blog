@@ -1,6 +1,7 @@
 import { WindowComponent } from "$components/WindowComponent";
 import { folderState } from "$utils/atom";
 import { useDidMountEffect } from "$utils/hooks/useDidMountEffect";
+import { AnimatePresence } from "framer-motion";
 import { memo } from "react";
 import { useRecoilValue } from "recoil";
 
@@ -12,10 +13,10 @@ export const FolderComponents = memo(() => {
     window.history.pushState({}, "", url);
   }, [folders]);
   return (
-    <>
+    <AnimatePresence initial={false}>
       {folders.map((item, index) => (
-        <WindowComponent key={item.title} item={item} index={index + 10} />
+        <WindowComponent key={item.title} item={item} index={index} />
       ))}
-    </>
+    </AnimatePresence>
   );
 });

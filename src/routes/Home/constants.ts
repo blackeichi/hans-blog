@@ -1,4 +1,8 @@
-export const TASK_LIST = {
+type TASK_LIST = {
+  [key: string]: string;
+};
+
+export const TASK_LIST: TASK_LIST = {
   MyComputer: "MyComputer",
   Documents: "Documents",
   Tags: "Tags",
@@ -22,3 +26,8 @@ export const TASK_STATE = {
 };
 
 export const DEFAULT_SIZE = 500;
+
+export const ACTION_TYPES = {
+  OPEN_FOLDER: "OPEN_FOLDER",
+  HOME_KEY_DOWN: "HOME_KEY_DOWN",
+};

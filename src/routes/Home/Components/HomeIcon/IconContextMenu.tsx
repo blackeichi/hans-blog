@@ -2,14 +2,9 @@ import { GLOBAL_COLOR } from "$utils/constans";
 import { motion } from "framer-motion";
 import { styled } from "styled-components";
 
-export const IconContextMenu = ({
-  onSetOpenedFolders,
-  setSelected,
-  setMouseLocale,
-}: any) => {
+export const IconContextMenu = ({ handleOpenFolder, setMouseLocale }: any) => {
   const onClickEvent = () => {
-    onSetOpenedFolders();
-    setSelected(null);
+    handleOpenFolder();
     setMouseLocale(null);
   };
   return (

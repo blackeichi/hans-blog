@@ -3,9 +3,13 @@ import { styled } from "styled-components";
 import { HandleOpenState } from "$components/Common/handleOpenState";
 import { ContextComponent } from "$components/ContextComponent.js";
 import { IconContextMenu } from "./IconContextMenu";
-import { SetOpenedFolders } from "$routes/Home/actions";
-import { useSetRecoilState } from "recoil";
-import { sizeState } from "$utils/atom";
+import {
+  TActionState,
+  TMouseLocaleState,
+  TSelectedState,
+  TSizeState,
+} from "$utils/atom";
+import { ACTION_TYPES } from "$routes/Home/constants";
 
 interface HomeIconProps {
   item: {
@@ -14,20 +18,31 @@ interface HomeIconProps {
     x: number;
     y: number;
   };
-  setSelected: Function;
-  setMouseLocale: Function;
+  setSelected: React.Dispatch<React.SetStateAction<TSelectedState>>;
+  setMouseLocale: React.Dispatch<React.SetStateAction<TMouseLocaleState>>;
+  setAction: React.Dispatch<React.SetStateAction<TActionState>>;
+  setSize: React.Dispatch<React.SetStateAction<TSizeState>>;
 }
 export const HomeIcon = memo(
-  ({ item, setSelected, setMouseLocale }: HomeIconProps) => {
-    const setSize = useSetRecoilState(sizeState);
+  ({
+    item,
+    setSelected,
+    setMouseLocale,
+    setAction,
+    setSize,
+  }: HomeIconProps) => {
+    const handleOpenFolder = () => {
+      setAction({
+        type: ACTION_TYPES.OPEN_FOLDER,
+      });
+    };
     const [isSelected, setIsSelected] = useState<boolean>(false);
-    const onSetOpenedFolders: Function = SetOpenedFolders([item.title]);
     const onClick = (event: any) => {
       setSize({
         width: event?.view?.innerWidth || 0,
         height: event?.view?.innerHeight || 0,
       });
-      setSelected(item.title);
+      setSelected([item.title]);
       setMouseLocale(null);
     };
     const onContextMenu = (event: any) => {
@@ -35,11 +50,10 @@ export const HomeIcon = memo(
         width: event?.view?.innerWidth || 0,
         height: event?.view?.innerHeight || 0,
       });
-      setSelected(item.title);
+      setSelected([item.title]);
     };
     const onDoubleClick = () => {
-      onSetOpenedFolders();
-      setSelected(null);
+      handleOpenFolder();
     };
     return (
       <HomeIconBox
@@ -56,8 +70,7 @@ export const HomeIcon = memo(
         <ContextComponent
           contextMenu={
             <IconContextMenu
-              onSetOpenedFolders={onSetOpenedFolders}
-              setSelected={setSelected}
+              handleOpenFolder={handleOpenFolder}
               setMouseLocale={setMouseLocale}
             />
           }
