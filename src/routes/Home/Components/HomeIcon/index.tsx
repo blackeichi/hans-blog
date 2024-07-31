@@ -3,13 +3,13 @@ import { styled } from "styled-components";
 import { HandleOpenState } from "$components/Common/handleOpenState";
 import { ContextComponent } from "$components/ContextComponent.js";
 import { IconContextMenu } from "./IconContextMenu";
+import { ACTION_TYPES } from "$routes/Home/constants";
 import {
   TActionState,
   TMouseLocaleState,
   TSelectedState,
   TSizeState,
-} from "$utils/atom";
-import { ACTION_TYPES } from "$routes/Home/constants";
+} from "$utils/types";
 
 interface HomeIconProps {
   item: {

@@ -2,11 +2,7 @@ import { motion } from "framer-motion";
 import React, { useState } from "react";
 import { styled } from "styled-components";
 
-export const ClickButtonEvent = ({
-  children,
-}: {
-  children: React.ReactNode;
-}) => {
+export const ClickButtonEvent = ({ icon }: { icon: React.ReactNode }) => {
   const [isPressed, setIsPressed] = useState(false);
   return (
     <ClickButtonEventBox
@@ -22,7 +18,7 @@ export const ClickButtonEvent = ({
         duration: 0,
       }}
     >
-      {children}
+      {icon}
     </ClickButtonEventBox>
   );
 };

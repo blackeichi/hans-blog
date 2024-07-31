@@ -1,7 +1,15 @@
 import { useState } from "react";
 import { ACTION_TYPES, TASK_ICONS } from "$routes/Home/constants";
 import { styled } from "styled-components";
-import { TActionState, TSelectedState, TSizeState } from "$utils/atom";
+import {
+  TActionState,
+  TDragState,
+  TSelectedState,
+  TSizeState,
+} from "$utils/types";
+import { TASK_BAR_HEIGHT } from "$utils/constans";
+import { mouseLocaleState } from "$utils/atom";
+import { useSetRecoilState } from "recoil";
 
 interface IHomeOverly {
   children: React.ReactNode;
@@ -9,12 +17,6 @@ interface IHomeOverly {
   setAction: React.Dispatch<React.SetStateAction<TActionState>>;
   setSize: React.Dispatch<React.SetStateAction<TSizeState>>;
 }
-type TDragState = {
-  startX: number;
-  endX?: number | undefined;
-  startY: number;
-  endY?: number | undefined;
-} | null;
 
 export const HomeOverly = ({
   children,
@@ -22,6 +24,7 @@ export const HomeOverly = ({
   setAction,
   setSize,
 }: IHomeOverly) => {
+  const setMouseLocale = useSetRecoilState(mouseLocaleState);
   const [dragStart, setDragStart] = useState(false);
   const [dragState, setDragState] = useState<TDragState>(null);
   const onDragStart = (event: any) => {
@@ -75,6 +78,7 @@ export const HomeOverly = ({
   };
   return (
     <HomeContainer
+      taskbarHeight={TASK_BAR_HEIGHT}
       onMouseDown={onDragStart}
       onMouseMove={dragStart ? onDrag : undefined}
       onClick={
@@ -85,6 +89,10 @@ export const HomeOverly = ({
             }
           : onDragEnd
       }
+      onBlur={() => {
+        setSelected(null);
+        setMouseLocale(null);
+      }}
       tabIndex={0}
       onKeyDown={handleKeyDown}
     >
@@ -113,9 +121,9 @@ export const HomeOverly = ({
   );
 };
 
-const HomeContainer = styled.div`
+const HomeContainer = styled.div<{ taskbarHeight: number }>`
   width: 100%;
-  height: 100vh;
+  height: ${(props) => `calc(100% - ${props.taskbarHeight}px)`};
   outline: none;
   position: relative;
   box-sizing: border-box;

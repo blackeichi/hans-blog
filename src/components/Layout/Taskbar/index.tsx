@@ -3,10 +3,11 @@ import { TaskMenuIcon } from "./TaskMenuIcon";
 import { TaskbarBlankBox, TaskbarSeparator } from "./components";
 import { FlexBox } from "styles";
 import { TaskBarClock } from "./TaskBarClock";
+import { TASK_BAR_HEIGHT } from "$utils/constans";
 
 export const Taskbar = () => {
   return (
-    <TaskbarBox>
+    <TaskbarBox height={TASK_BAR_HEIGHT}>
       <Box>
         <TaskMenuIcon />
         <TaskbarBlankBox />
@@ -21,9 +22,9 @@ export const Taskbar = () => {
   );
 };
 
-const TaskbarBox = styled.div`
+const TaskbarBox = styled.div<{ height: number }>`
   width: 100%;
-  height: 35px;
+  height: ${(props) => `${props.height}px`};
   position: absolute;
   left: 0;
   bottom: 0;

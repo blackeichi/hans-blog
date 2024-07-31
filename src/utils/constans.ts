@@ -16,3 +16,5 @@ export const KEY_EVENTS = {
   ARROW_RIGHT: "ArrowRight",
   META: "Meta",
 };
+
+export const TASK_BAR_HEIGHT = 35;

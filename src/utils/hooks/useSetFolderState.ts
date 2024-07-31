@@ -1,10 +1,6 @@
 import { DEFAULT_SIZE, TASK_STATE } from "$routes/Home/constants";
-import {
-  TselectedIndexState,
-  folderState,
-  selectedState,
-  sizeState,
-} from "$utils/atom";
+import { folderState, selectedState, sizeState } from "$utils/atom";
+import { TFolderList } from "$utils/types";
 import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 
 export const useSetFolderState = () => {
@@ -13,7 +9,7 @@ export const useSetFolderState = () => {
   const setFolderState = useSetRecoilState(folderState);
   const handleSetFolder = () => {
     if (selected && selected.length > 0) {
-      setFolderState((prev: TselectedIndexState) => {
+      setFolderState((prev: TFolderList) => {
         const filtered = prev.filter(
           (value) => !selected.includes(value?.title)
         );

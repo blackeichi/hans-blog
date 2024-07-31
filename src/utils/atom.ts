@@ -1,43 +1,31 @@
 import { atom } from "recoil";
+import {
+  TActionState,
+  TMouseLocaleState,
+  TSelectedState,
+  TSizeState,
+  TFolderList,
+} from "./types";
 
-export type TSelectedState = null | string[];
-
-export type TMouseLocaleState = null | { x: number; y: number };
-
-export type TselectedIndexState = {
-  title: string;
-  state: null | string;
-  x: number;
-  y: number;
-  width: number;
-  height: number;
-}[];
-
-export type TSizeState = {
-  width: number;
-  height: number;
-};
-
-export type TActionState = {
-  type: string;
-  value?: any;
-} | null;
-
+// 선택된 icon의 상태
 export const selectedState = atom<TSelectedState>({
   key: "selectedState",
   default: null,
 });
 
+// 마우스 위치 state
 export const mouseLocaleState = atom<TMouseLocaleState>({
   key: "mouseLocaleState",
   default: null,
 });
 
-export const folderState = atom<TselectedIndexState>({
+// 현재 열려있는 폴더들의 state
+export const folderState = atom<TFolderList>({
   key: "folderState",
   default: [],
 });
 
+// 바탕화면 size state
 export const sizeState = atom<TSizeState>({
   key: "sizeState",
   default: {
@@ -46,6 +34,7 @@ export const sizeState = atom<TSizeState>({
   },
 });
 
+// action state. 리렌더링 최소화를 위해 action을 따로 처리하는 컴포넌트에서 사용
 export const actionState = atom<TActionState>({
   key: "actionState",
   default: null,
