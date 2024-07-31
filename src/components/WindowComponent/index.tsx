@@ -34,7 +34,9 @@ export const WindowComponent = ({ item, index }: WindowProps) => {
         windowState={windowState}
         item={item}
         setWindowState={setWindowState}
+        setFolderState={setFolderState}
         onChangeFolderState={onChangeFolderState}
+        index={index}
       />
       <WindowContentBox>
         <Content>

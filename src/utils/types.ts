@@ -5,6 +5,7 @@ export type TMouseLocaleState = null | { x: number; y: number };
 export type TFolder = {
   title: string;
   state: null | string;
+  isMax: boolean;
   x: number;
   y: number;
   width: number;

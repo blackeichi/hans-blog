@@ -3,6 +3,8 @@ import { folderState, selectedState, sizeState } from "$utils/atom";
 import { TFolderList } from "$utils/types";
 import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 
+const ADDITIONAL_SIZE = 35;
+
 export const useSetFolderState = () => {
   const size = useRecoilValue(sizeState);
   const [selected, setSelected] = useRecoilState(selectedState);
@@ -24,22 +26,29 @@ export const useSetFolderState = () => {
             )
             .map((item, index) => ({
               title: item,
+              isMax: false,
               state: TASK_STATE.OPEN,
               ...(selected.length > 1
                 ? {
-                    x: size.width / 2 - DEFAULT_SIZE / 2 + index * 10,
-                    y: size.height / 2 - DEFAULT_SIZE / 2 + index * 10,
+                    x:
+                      size.width / 2 -
+                      DEFAULT_SIZE / 2 +
+                      index * ADDITIONAL_SIZE,
+                    y:
+                      size.height / 2 -
+                      DEFAULT_SIZE / 2 +
+                      index * ADDITIONAL_SIZE,
                   }
                 : {
                     x: lastFolder
                       ? lastFolder.x + lastFolder.width >= size.width
-                        ? lastFolder.x - 20
-                        : lastFolder.x + 20
+                        ? lastFolder.x - ADDITIONAL_SIZE
+                        : lastFolder.x + ADDITIONAL_SIZE
                       : size.width / 2 - DEFAULT_SIZE / 2,
                     y: lastFolder
                       ? lastFolder.y + lastFolder.height >= size.height
-                        ? lastFolder.y - 20
-                        : lastFolder.y + 20
+                        ? lastFolder.y - ADDITIONAL_SIZE
+                        : lastFolder.y + ADDITIONAL_SIZE
                       : size.height / 2 - DEFAULT_SIZE / 2,
                   }),
               width: DEFAULT_SIZE,

@@ -5,25 +5,32 @@ import {
   IconBox,
   MaximizationIcon,
   MinimalizationIcon,
+  UnMaximizationBox,
+  UnMaximizationIcom,
   WindowTitleBox,
   WindowTitleExtends,
 } from "../styles";
 import { ClickButtonEvent } from "./ClickButtonEvent";
-import { TDragState, TFolder } from "$utils/types";
+import { TDragState, TFolder, TFolderList } from "$utils/types";
 import { TASK_BAR_HEIGHT } from "$utils/constans";
+import { TASK_STATE } from "$routes/Home/constants";
 
 interface IWindowTitle {
   windowState: TFolder;
   item: TFolder;
   setWindowState: React.Dispatch<React.SetStateAction<TFolder>>;
-  onChangeFolderState: () => void;
+  setFolderState: React.Dispatch<React.SetStateAction<TFolderList>>;
+  onChangeFolderState: (value?: TFolder) => void;
+  index: number;
 }
 
 export const WindowTitle = ({
   windowState,
   item,
   setWindowState,
+  setFolderState,
   onChangeFolderState,
+  index,
 }: IWindowTitle) => {
   const [dragStart, setDragStart] = useState(false);
   const [dragState, setDragState] = useState<TDragState>(null);
@@ -62,14 +69,59 @@ export const WindowTitle = ({
     }
   };
   const WindowBtns = [
-    <MinimalizationIcon />,
-    <MaximizationIcon />,
-    <CloseIcon>x</CloseIcon>,
+    {
+      icon: <MinimalizationIcon />,
+      action: () => {
+        const newFolderState = {
+          ...windowState,
+          state: TASK_STATE.HIDE,
+        };
+        setWindowState(newFolderState);
+        onChangeFolderState(newFolderState);
+      },
+    },
+    {
+      icon: windowState.isMax ? (
+        <UnMaximizationBox>
+          <UnMaximizationIcom
+            style={{
+              bottom: 0,
+              zIndex: 1,
+            }}
+          />
+          <UnMaximizationIcom
+            style={{
+              right: 1,
+            }}
+          />
+        </UnMaximizationBox>
+      ) : (
+        <MaximizationIcon />
+      ),
+      action: () => {
+        const newFolderState = {
+          ...windowState,
+          isMax: windowState.isMax ? false : true,
+        };
+        setWindowState(newFolderState);
+        onChangeFolderState(newFolderState);
+      },
+    },
+    {
+      icon: <CloseIcon>x</CloseIcon>,
+      action: () => {
+        setFolderState((prev) => [
+          ...prev.slice(0, index),
+          ...prev.slice(index + 1, prev.length),
+        ]);
+      },
+    },
   ];
   return (
     <WindowTitleBox
       onMouseDown={onMoveStart}
       onMouseMove={dragStart ? onMove : undefined}
+      onMouseLeave={onMoveEnd}
       onMouseUp={onMoveEnd}
     >
       {dragStart && <WindowTitleExtends />}
@@ -77,10 +129,11 @@ export const WindowTitle = ({
       <FlexBox
         style={{ zIndex: 1 }}
         onClick={(event) => event.stopPropagation()}
+        onMouseDown={(event) => event.stopPropagation()}
       >
-        {WindowBtns.map((icon, index) => (
+        {WindowBtns.map((btn, index) => (
           <IconBox key={index}>
-            <ClickButtonEvent icon={icon} />
+            <ClickButtonEvent icon={btn.icon} action={btn.action} />
           </IconBox>
         ))}
       </FlexBox>

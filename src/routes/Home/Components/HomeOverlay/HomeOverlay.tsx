@@ -28,15 +28,17 @@ export const HomeOverly = ({
   const [dragStart, setDragStart] = useState(false);
   const [dragState, setDragState] = useState<TDragState>(null);
   const onDragStart = (event: any) => {
-    setDragStart(true);
-    setSize({
-      width: event?.view?.innerWidth || 0,
-      height: event?.view?.innerHeight || 0,
-    });
-    setDragState({
-      startX: event.clientX,
-      startY: event.clientY,
-    });
+    if (event?.button === 0) {
+      setDragStart(true);
+      setSize({
+        width: event?.view?.innerWidth || 0,
+        height: event?.view?.innerHeight || 0,
+      });
+      setDragState({
+        startX: event.clientX,
+        startY: event.clientY,
+      });
+    }
   };
   const onDrag = (event: React.MouseEvent) => {
     const start = Math.min(dragState?.startX || 0, event.clientX);
@@ -81,6 +83,7 @@ export const HomeOverly = ({
       taskbarHeight={TASK_BAR_HEIGHT}
       onMouseDown={onDragStart}
       onMouseMove={dragStart ? onDrag : undefined}
+      onMouseLeave={onDragEnd}
       onClick={
         isDraged
           ? (event) => {

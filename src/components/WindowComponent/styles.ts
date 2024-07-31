@@ -4,6 +4,7 @@ import { FlexBox } from "styles";
 
 export const WindowBox = styled(motion.div)<{
   item: {
+    isMax: boolean;
     x: number;
     y: number;
     width?: number;
@@ -12,10 +13,10 @@ export const WindowBox = styled(motion.div)<{
   index: number;
 }>`
   position: absolute;
-  left: ${(props) => `${props.item.x}px`};
-  top: ${(props) => `${props.item.y}px`};
-  width: ${(props) => `${props.item.width}px`};
-  height: ${(props) => `${props.item.height}px`};
+  left: ${(props) => (props.item.isMax ? 0 : `${props.item.x}px`)};
+  top: ${(props) => (props.item.isMax ? 0 : `${props.item.y}px`)};
+  width: ${(props) => (props.item.isMax ? "100%" : `${props.item.width}px`)};
+  height: ${(props) => (props.item.isMax ? "100%" : `${props.item.height}px`)};
   z-index: ${(props) => props.index};
   background-color: ${(props) => props.theme.gray};
   border-top: 4px solid ${(props) => props.theme.lightGray};
@@ -52,10 +53,10 @@ export const WindowTitleBox = styled.div`
 `;
 export const WindowTitleExtends = styled.div`
   position: absolute;
-  left: -100px;
-  top: -100;
-  width: calc(100% + 200px);
-  height: calc(100% + 200px);
+  left: -500px;
+  top: -500;
+  width: calc(100% + 1000px);
+  height: calc(100% + 1000px);
 `;
 export const IconBox = styled.div`
   width: 16px;
@@ -74,7 +75,23 @@ export const MinimalizationIcon = styled.div`
 export const MaximizationIcon = styled.div`
   width: 100%;
   height: 100%;
+  background-color: ${(props) => props.theme.gray};
   border-top: 3px solid ${(props) => props.theme.black};
+  border-left: 1px solid ${(props) => props.theme.black};
+  border-bottom: 1px solid ${(props) => props.theme.black};
+  border-right: 1px solid ${(props) => props.theme.black};
+`;
+export const UnMaximizationBox = styled.div`
+  width: 100%;
+  height: 100%;
+  position: relative;
+`;
+export const UnMaximizationIcom = styled.div`
+  position: absolute;
+  width: 70%;
+  height: 70%;
+  background-color: ${(props) => props.theme.gray};
+  border-top: 2px solid ${(props) => props.theme.black};
   border-left: 1px solid ${(props) => props.theme.black};
   border-bottom: 1px solid ${(props) => props.theme.black};
   border-right: 1px solid ${(props) => props.theme.black};

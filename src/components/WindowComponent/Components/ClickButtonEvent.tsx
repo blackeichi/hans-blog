@@ -2,12 +2,21 @@ import { motion } from "framer-motion";
 import React, { useState } from "react";
 import { styled } from "styled-components";
 
-export const ClickButtonEvent = ({ icon }: { icon: React.ReactNode }) => {
+export const ClickButtonEvent = ({
+  icon,
+  action,
+}: {
+  icon: React.ReactNode;
+  action: () => void;
+}) => {
   const [isPressed, setIsPressed] = useState(false);
   return (
     <ClickButtonEventBox
       onMouseDown={() => setIsPressed(true)}
-      onMouseUp={() => setIsPressed(false)}
+      onMouseUp={() => {
+        setIsPressed(false);
+        action();
+      }}
       isPressed={isPressed}
       whileTap={{
         padding: "1px",

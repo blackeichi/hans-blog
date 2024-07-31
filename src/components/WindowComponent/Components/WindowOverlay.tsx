@@ -1,6 +1,7 @@
 import { ResizeWindowBox, WindowBox } from "../styles";
 import { TFolder } from "$utils/types";
 import boxResizeEvent from "$utils/libs/etcLibs";
+import { TASK_STATE } from "$routes/Home/constants";
 
 interface IWindowOverlay {
   windowState: TFolder;
@@ -30,10 +31,21 @@ export const WindowOverlay = ({
       item={windowState}
       // z-index 값 높이기
       index={index + 10}
-      initial={{ scale: 0.9 }}
-      animate={{ scale: 1 }}
-      exit={{ scale: 0.9 }}
-      transition={{ ease: "linear", duration: 0.1 }}
+      initial={{
+        scale: windowState.state === TASK_STATE.HIDE ? 0 : 0.9,
+        y: windowState.state === TASK_STATE.HIDE ? 400 : 0,
+        display: windowState.state === TASK_STATE.HIDE ? "none" : "block",
+      }}
+      animate={{
+        scale: windowState.state === TASK_STATE.HIDE ? 0 : 1,
+        y: windowState.state === TASK_STATE.HIDE ? 400 : 0,
+        display: windowState.state === TASK_STATE.HIDE ? "none" : "block",
+      }}
+      exit={{ scale: 0.7, opacity: 0 }}
+      transition={{
+        ease: "linear",
+        duration: 0.1,
+      }}
     >
       {children}
       <ResizeWindowBox
