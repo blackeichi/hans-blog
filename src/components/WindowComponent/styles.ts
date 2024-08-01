@@ -48,18 +48,17 @@ export const ResizeWindowBox = styled.div`
   cursor: nwse-resize;
 `;
 
-export const WindowTitleBox = styled.div<{ backgroundColor: string }>`
+export const WindowTitleBox = styled.div`
   width: 100%;
   height: 30px;
-  background-color: ${(props) => props.backgroundColor};
+  background-color: ${(props) => props.theme.blue};
   color: white;
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding-right: 5px;
   position: relative;
-  font-family: "Retro";
-  font-size: 10px;
+  font-size: 14px;
 `;
 export const Title = styled.div`
   padding-left: 5px;

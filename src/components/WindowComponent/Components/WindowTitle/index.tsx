@@ -12,8 +12,8 @@ import {
   WindowTitleExtends,
 } from "../../styles";
 import { TDragState, TFolder, TFolderList } from "$utils/types";
-import { GLOBAL_COLOR, TASK_BAR_HEIGHT } from "$utils/constans";
-import { TASK_LIST, TASK_STATE } from "$routes/Home/constants";
+import { TASK_BAR_HEIGHT } from "$utils/constans";
+import { TASK_STATE } from "$routes/Home/constants";
 import { ClickButtonEvent } from "./ClickButtonEvent";
 
 interface IWindowTitle {
@@ -119,9 +119,6 @@ export const WindowTitle = ({
   ];
   return (
     <WindowTitleBox
-      backgroundColor={
-        item.title === TASK_LIST.Profile ? "rgba(0,0,0,0.5)" : GLOBAL_COLOR.blue
-      }
       onMouseDown={onMoveStart}
       onMouseMove={dragStart ? onMove : undefined}
       onMouseLeave={onMoveEnd}
