@@ -1,4 +1,8 @@
-import { DEFAULT_SIZE, TASK_STATE } from "$routes/Home/constants";
+import {
+  DEFAULT_HEIGHT,
+  DEFAULT_WIDTH,
+  TASK_STATE,
+} from "$routes/Home/constants";
 import { folderState, selectedState, sizeState } from "$utils/atom";
 import { TASK_BAR_HEIGHT } from "$utils/constans";
 import { TFolderList } from "$utils/types";
@@ -33,11 +37,11 @@ export const useSetFolderState = () => {
                 ? {
                     x:
                       size.width / 2 -
-                      DEFAULT_SIZE / 2 +
+                      DEFAULT_WIDTH / 2 +
                       index * ADDITIONAL_SIZE,
                     y:
                       size.height / 2 -
-                      DEFAULT_SIZE / 2 +
+                      DEFAULT_HEIGHT / 2 +
                       index * ADDITIONAL_SIZE,
                   }
                 : {
@@ -45,16 +49,16 @@ export const useSetFolderState = () => {
                       ? lastFolder.x + lastFolder.width >= size.width
                         ? lastFolder.x - ADDITIONAL_SIZE
                         : lastFolder.x + ADDITIONAL_SIZE
-                      : size.width / 2 - DEFAULT_SIZE / 2,
+                      : size.width / 2 - DEFAULT_WIDTH / 2,
                     y: lastFolder
                       ? lastFolder.y + lastFolder.height >=
                         size.height - TASK_BAR_HEIGHT
                         ? lastFolder.y - ADDITIONAL_SIZE
                         : lastFolder.y + ADDITIONAL_SIZE
-                      : size.height / 2 - DEFAULT_SIZE / 2,
+                      : size.height / 2 - DEFAULT_HEIGHT / 2,
                   }),
-              width: DEFAULT_SIZE,
-              height: DEFAULT_SIZE,
+              width: DEFAULT_WIDTH,
+              height: DEFAULT_HEIGHT,
             })),
         ];
         return newArr;

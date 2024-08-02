@@ -21,8 +21,8 @@ const ProfileBodyWrapper = styled.div`
   align-items: center;
 `;
 const ComputerImgBox = styled.div<{ src: string }>`
-  width: 250px;
-  height: 250px;
+  width: 200px;
+  height: 200px;
   background-image: ${(props) => `url(${props.src})`};
   background-size: contain;
   background-position: center;
@@ -34,14 +34,14 @@ const ProfileImageBox = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  left: 25px;
-  top: 30px;
-  width: 200px;
-  height: 145px;
+  left: 20px;
+  top: 23px;
+  width: 160px;
+  height: 115px;
 `;
 const ProfileImage = styled.div<{ src: string }>`
-  width: 190px;
-  height: 190px;
+  width: 100%;
+  height: 150px;
   background-image: ${(props) => `url(${props.src})`};
   background-size: contain;
   background-position: center;

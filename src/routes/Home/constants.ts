@@ -25,7 +25,8 @@ export const TASK_STATE = {
   OPEN: "open",
 };
 
-export const DEFAULT_SIZE = 600;
+export const DEFAULT_WIDTH = 700;
+export const DEFAULT_HEIGHT = 500;
 
 export const ACTION_TYPES = {
   OPEN_FOLDER: "OPEN_FOLDER",
