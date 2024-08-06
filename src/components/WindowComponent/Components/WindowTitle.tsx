@@ -2,7 +2,6 @@ import { useState } from "react";
 import { FlexBox } from "styles";
 import {
   CloseIcon,
-  IconBox,
   MaximizationIcon,
   MinimalizationIcon,
   Title,
@@ -10,11 +9,11 @@ import {
   UnMaximizationIcom,
   WindowTitleBox,
   WindowTitleExtends,
-} from "../../styles";
+} from "../styles";
 import { TDragState, TFolder, TFolderList } from "$utils/types";
 import { TASK_BAR_HEIGHT } from "$utils/constans";
 import { TASK_STATE } from "$routes/Home/constants";
-import { ClickButtonEvent } from "./ClickButtonEvent";
+import { ButtonComponent } from "$components/ButtonComponent";
 
 interface IWindowTitle {
   windowState: TFolder;
@@ -132,9 +131,13 @@ export const WindowTitle = ({
         onMouseDown={(event) => event.stopPropagation()}
       >
         {WindowBtns.map((btn, index) => (
-          <IconBox key={index}>
-            <ClickButtonEvent icon={btn.icon} action={btn.action} />
-          </IconBox>
+          <ButtonComponent
+            key={index}
+            width="16px"
+            height="16px"
+            content={btn.icon}
+            action={btn.action}
+          />
         ))}
       </FlexBox>
     </WindowTitleBox>

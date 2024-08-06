@@ -6,6 +6,7 @@ import { Helmet } from "react-helmet";
 import { Layout } from "$components/Layout";
 import "./App.css";
 import { auth } from "fbase";
+import { AlertComponent } from "$components/AlertComponent";
 
 const HomePage = lazy(() => import("$routes/Home"));
 
@@ -25,6 +26,7 @@ function App() {
   return (
     <ThemeProvider theme={GLOBAL_COLOR}>
       <GlobalStyles />
+      <AlertComponent />
       <Helmet titleTemplate={`%s - HBlog`} defaultTitle="Han's Blog">
         <meta name="description" content="Han's Blog" />
       </Helmet>
@@ -112,5 +114,8 @@ table {
 }
 div {
   background-repeat : no-repeat;
+}
+button{
+  background: inherit ; border:none; box-shadow:none; border-radius:0; padding:0; overflow:visible;
 }
 `;

@@ -4,13 +4,15 @@ import { styled } from "styled-components";
 import { FlexBox } from "styles";
 import { useSetRecoilState } from "recoil";
 import { alertMsgState } from "$utils/atom";
+import { ButtonComponent } from "$components/ButtonComponent";
 
 export const System = () => {
   const setAlertMsg = useSetRecoilState(alertMsgState);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [code, setCode] = useState("");
-  const handleSubmit = () => {
+  const handleSubmit = (event: React.FormEvent) => {
+    event.preventDefault();
     if (!username) {
       setAlertMsg("이름을 입력해주세요.");
     }
@@ -44,6 +46,16 @@ export const System = () => {
           text={code}
           setText={setCode}
         />
+        <ButtonComponent
+          content={<span>확 인</span>}
+          action={() => {}}
+          width="60px"
+          height="35px"
+          type="submit"
+          styles={{
+            marginTop: "10px",
+          }}
+        />
       </ColBox>
     </SystemWrapper>
   );
@@ -54,7 +66,8 @@ const SystemWrapper = styled.div`
   gap: 40px;
   width: 100%;
   height: 100%;
-  padding: 30px 0;
+  padding-top: 30px;
+  padding-bottom: 15px;
 `;
 const Img = styled.div<{ src: string }>`
   width: 220px;
@@ -65,11 +78,18 @@ const Img = styled.div<{ src: string }>`
 `;
 const Title = styled.div`
   font-family: "Retro";
-  font-size: 25px;
+  font-size: 16px;
 `;
-const SubTitle = styled.div``;
+const SubTitle = styled.div`
+  font-size: 13px;
+  font-weight: 600;
+`;
 const ColBox = styled(FlexBox)`
   flex-direction: column;
   gap: 20px;
   align-items: flex-start;
+  padding-top: 15px;
+  padding-right: 30px;
+  font-size: 14px;
+  font-weight: 600;
 `;

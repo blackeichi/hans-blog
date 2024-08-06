@@ -76,15 +76,6 @@ export const WindowTitleExtends = styled.div`
   height: calc(100% + 1000px);
 `;
 
-export const IconBox = styled.div`
-  width: 16px;
-  height: 16px;
-  background-color: ${(props) => props.theme.gray};
-  border-top: 2px solid ${(props) => props.theme.lightGray};
-  border-left: 2px solid ${(props) => props.theme.lightGray};
-  border-bottom: 2px solid ${(props) => props.theme.shadow};
-  border-right: 2px solid ${(props) => props.theme.shadow};
-`;
 export const MinimalizationIcon = styled.div`
   width: 100%;
   height: 100%;
@@ -122,7 +113,7 @@ export const CloseIcon = styled.div`
   align-items: center;
   justify-content: center;
   font-weight: bold;
-  font-size: 16px;
+  font-size: 14px;
   padding-bottom: 2px;
   padding-right: 1px;
 `;
