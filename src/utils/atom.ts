@@ -39,3 +39,8 @@ export const actionState = atom<TActionState>({
   key: "actionState",
   default: null,
 });
+
+export const alertMsgState = atom<string | null>({
+  key: "alertMsgState",
+  default: null,
+});

@@ -22,7 +22,7 @@ export const ProfileContent = () => {
         </ProfileMenu>
       </ProfileMenuBox>
       <ProfileDataBox>
-        <ProfileBody />
+        <ProfileBody selectedMenu={selectedMenu} />
       </ProfileDataBox>
     </ProfileContentBox>
   );

@@ -1,25 +1,18 @@
 import { styled } from "styled-components";
 
-export const ProfileBody = () => {
+export const Common = () => {
   return (
-    <ProfileBodyWrapper>
+    <>
       <ComputerImgBox src="/images/computer.png">
         <ProfileImageBox>
           <ProfileImage src="/images/amIcute.png" />
         </ProfileImageBox>
       </ComputerImgBox>
       <ProfileInfo></ProfileInfo>
-    </ProfileBodyWrapper>
+    </>
   );
 };
 
-const ProfileBodyWrapper = styled.div`
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  padding: 20px;
-  align-items: center;
-`;
 const ComputerImgBox = styled.div<{ src: string }>`
   width: 200px;
   height: 200px;

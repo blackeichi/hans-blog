@@ -14,8 +14,12 @@ import { HomeIcon } from "./Components/HomeIcon";
 import { HomeOverly } from "./Components/HomeOverlay/HomeOverlay";
 import { HandleActions } from "./handleActions";
 
+interface HomeProps {
+  isLoggedIn: any;
+}
+
 const withHome = (Component: any) => {
-  return () => {
+  return (props: HomeProps) => {
     const setFolderState = useSetRecoilState(folderState);
     const { search } = useLocation();
     const searchData = Object.fromEntries(new URLSearchParams(search));
@@ -27,11 +31,11 @@ const withHome = (Component: any) => {
         setFolderState(folderData);
       }
     }, []);
-    return <Component />;
+    return <Component props={props} />;
   };
 };
 
-const Home = withHome(() => {
+const Home = withHome(({ isLoggedIn }: HomeProps) => {
   const setSelected = useSetRecoilState(selectedState);
   const setMouseLocale = useSetRecoilState(mouseLocaleState);
   const setAction = useSetRecoilState(actionState);

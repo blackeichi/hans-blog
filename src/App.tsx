@@ -1,14 +1,27 @@
-import { lazy, Suspense } from "react";
+import { useState, lazy, Suspense, useEffect } from "react";
 import { createGlobalStyle, styled, ThemeProvider } from "styled-components";
 import { GLOBAL_COLOR } from "./utils/constans";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { Helmet } from "react-helmet";
 import { Layout } from "$components/Layout";
 import "./App.css";
+import { auth } from "fbase";
 
 const HomePage = lazy(() => import("$routes/Home"));
 
 function App() {
+  const [init, setInit] = useState<boolean>(false);
+  const [isLoggedIn, setIsLoggedIn] = useState<any>(auth.currentUser);
+  useEffect(() => {
+    auth.onAuthStateChanged((user) => {
+      if (user) {
+        setIsLoggedIn(true);
+      } else {
+        setIsLoggedIn(false);
+      }
+      setInit(true);
+    });
+  }, []);
   return (
     <ThemeProvider theme={GLOBAL_COLOR}>
       <GlobalStyles />
@@ -24,9 +37,14 @@ function App() {
               </Loader>
             }
           >
-            <Routes>
-              <Route path="/" element={<HomePage />} />
-            </Routes>
+            {init && (
+              <Routes>
+                <Route
+                  path="/"
+                  element={<HomePage isLoggedIn={isLoggedIn} />}
+                />
+              </Routes>
+            )}
           </Suspense>
         </Layout>
       </BrowserRouter>
