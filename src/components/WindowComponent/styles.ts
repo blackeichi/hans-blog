@@ -26,6 +26,7 @@ export const WindowBox = styled(motion.div)<{
     props.item.isMax ? "none" : `4px solid ${props.theme.shadow}`};
   border-right: ${(props) =>
     props.item.isMax ? "none" : `4px solid ${props.theme.shadow}`};
+  text-shadow: 1px 1px gray;
 `;
 
 export const WindowContentBox = styled.div`
@@ -85,10 +86,8 @@ export const MaximizationIcon = styled.div`
   width: 100%;
   height: 100%;
   background-color: ${(props) => props.theme.gray};
+  border: 1px solid ${(props) => props.theme.black};
   border-top: 3px solid ${(props) => props.theme.black};
-  border-left: 1px solid ${(props) => props.theme.black};
-  border-bottom: 1px solid ${(props) => props.theme.black};
-  border-right: 1px solid ${(props) => props.theme.black};
 `;
 export const UnMaximizationBox = styled.div`
   width: 100%;
@@ -100,10 +99,8 @@ export const UnMaximizationIcom = styled.div`
   width: 70%;
   height: 70%;
   background-color: ${(props) => props.theme.gray};
+  border: 1px solid ${(props) => props.theme.black};
   border-top: 2px solid ${(props) => props.theme.black};
-  border-left: 1px solid ${(props) => props.theme.black};
-  border-bottom: 1px solid ${(props) => props.theme.black};
-  border-right: 1px solid ${(props) => props.theme.black};
 `;
 export const CloseIcon = styled.div`
   width: 100%;

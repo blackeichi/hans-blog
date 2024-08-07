@@ -1,44 +1,54 @@
 import { styled } from "styled-components";
+import { FlexBox } from "styles";
 
-export const Common = () => {
+const Common = () => {
   return (
-    <>
-      <ComputerImgBox src="/images/computer.png">
-        <ProfileImageBox>
-          <ProfileImage src="/images/amIcute.png" />
-        </ProfileImageBox>
-      </ComputerImgBox>
-      <ProfileInfo></ProfileInfo>
-    </>
+    <CommonBox>
+      <ComputerImgBox src="/images/computer.png" />
+      <ProfileInfo>
+        <EachInfo>
+          <Text>Profile : </Text>
+          <SubText>한정우 (남)</SubText>
+          <SubText>1995. 06. 13</SubText>
+        </EachInfo>
+      </ProfileInfo>
+    </CommonBox>
   );
 };
-
+export default Common;
+const CommonBox = styled(FlexBox)`
+  width: 100%;
+  height: 100%;
+  align-items: flex-start;
+  padding: 10px 60px;
+  gap: 60px;
+`;
 const ComputerImgBox = styled.div<{ src: string }>`
-  width: 200px;
-  height: 200px;
+  width: 180px;
+  height: 180px;
   background-image: ${(props) => `url(${props.src})`};
   background-size: contain;
   background-position: center;
   position: relative;
+  margin-top: 40px;
+  flex-shrink: 0;
 `;
-const ProfileImageBox = styled.div`
-  position: absolute;
-  background-color: ${(props) => props.theme.green};
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  left: 20px;
-  top: 23px;
-  width: 160px;
-  height: 115px;
-`;
-const ProfileImage = styled.div<{ src: string }>`
+const ProfileInfo = styled(FlexBox)`
   width: 100%;
-  height: 150px;
-  background-image: ${(props) => `url(${props.src})`};
-  background-size: contain;
-  background-position: center;
+  flex-direction: column;
+  align-items: flex-start;
+  padding-top: 10px;
+  font-size: 15px;
 `;
-const ProfileInfo = styled.div`
-  width: 100%;
+
+const EachInfo = styled(FlexBox)`
+  flex-direction: column;
+  gap: 10px;
+  align-items: flex-start;
+`;
+const Text = styled.div`
+  font-weight: 600;
+`;
+const SubText = styled.div`
+  padding-left: 30px;
 `;

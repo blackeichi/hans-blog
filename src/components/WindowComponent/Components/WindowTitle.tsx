@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { FlexBox } from "styles";
 import {
   CloseIcon,
@@ -16,6 +16,7 @@ import { TASK_STATE } from "$routes/Home/constants";
 import { ButtonComponent } from "$components/ButtonComponent";
 
 interface IWindowTitle {
+  isProfile: boolean;
   windowState: TFolder;
   item: TFolder;
   setWindowState: React.Dispatch<React.SetStateAction<TFolder>>;
@@ -25,6 +26,7 @@ interface IWindowTitle {
 }
 
 export const WindowTitle = ({
+  isProfile,
   windowState,
   item,
   setWindowState,
@@ -86,26 +88,28 @@ export const WindowTitle = ({
         onChangeFolderState(newFolderState);
       },
     },
-    {
-      icon: windowState.isMax ? (
-        <UnMaximizationBox>
-          <UnMaximizationIcom
-            style={{
-              bottom: 0,
-              zIndex: 1,
-            }}
-          />
-          <UnMaximizationIcom
-            style={{
-              right: 1,
-            }}
-          />
-        </UnMaximizationBox>
-      ) : (
-        <MaximizationIcon />
-      ),
-      action: () => onMaximization(),
-    },
+    isProfile
+      ? null
+      : {
+          icon: windowState.isMax ? (
+            <UnMaximizationBox>
+              <UnMaximizationIcom
+                style={{
+                  bottom: 0,
+                  zIndex: 1,
+                }}
+              />
+              <UnMaximizationIcom
+                style={{
+                  right: 1,
+                }}
+              />
+            </UnMaximizationBox>
+          ) : (
+            <MaximizationIcon />
+          ),
+          action: () => onMaximization(),
+        },
     {
       icon: <CloseIcon>x</CloseIcon>,
       action: () => {
@@ -124,20 +128,25 @@ export const WindowTitle = ({
       onMouseUp={onMoveEnd}
     >
       {dragStart && <WindowTitleExtends />}
-      <Title onDoubleClick={onMaximization}>{windowState.title}</Title>
+      <Title onDoubleClick={() => (isProfile ? null : onMaximization())}>
+        {windowState.title}
+      </Title>
       <FlexBox
         style={{ zIndex: 1 }}
         onClick={(event) => event.stopPropagation()}
         onMouseDown={(event) => event.stopPropagation()}
       >
         {WindowBtns.map((btn, index) => (
-          <ButtonComponent
-            key={index}
-            width="16px"
-            height="16px"
-            content={btn.icon}
-            action={btn.action}
-          />
+          <React.Fragment key={index}>
+            {btn && (
+              <ButtonComponent
+                width="16px"
+                height="16px"
+                content={btn.icon}
+                action={btn.action}
+              />
+            )}
+          </React.Fragment>
         ))}
       </FlexBox>
     </WindowTitleBox>

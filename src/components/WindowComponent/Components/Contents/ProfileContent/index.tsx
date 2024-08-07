@@ -31,6 +31,7 @@ export const ProfileContent = () => {
 const ProfileContentBox = styled(WindowContentBox)`
   display: flex;
   flex-direction: column;
+  text-shadow: 1px 1px gray;
 `;
 const ProfileMenuBox = styled.div`
   height: 30px;

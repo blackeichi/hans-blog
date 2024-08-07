@@ -69,6 +69,7 @@ export const ButtonBox = styled(motion.button)<{
   border-left: 2px solid ${(props) => props.theme.lightGray};
   border-bottom: 2px solid ${(props) => props.theme.shadow};
   border-right: 2px solid ${(props) => props.theme.shadow};
+  text-shadow: 1px 1px gray;
 `;
 const Button = styled(motion.div)`
   width: 100%;

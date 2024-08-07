@@ -1,11 +1,15 @@
 import { styled } from "styled-components";
-import { Common } from "./Common";
-import { System } from "./System";
+import { lazy, Suspense } from "react";
+
+const CommonComponent = lazy(() => import("./Common"));
+const SystemComponent = lazy(() => import("./System"));
 
 export const ProfileBody = ({ selectedMenu }: { selectedMenu: number }) => {
   return (
     <ProfileBodyWrapper>
-      {selectedMenu === 1 ? <Common /> : <System />}
+      <Suspense>
+        {selectedMenu === 1 ? <CommonComponent /> : <SystemComponent />}
+      </Suspense>
     </ProfileBodyWrapper>
   );
 };

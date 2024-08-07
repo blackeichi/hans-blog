@@ -6,7 +6,7 @@ import { useSetRecoilState } from "recoil";
 import { alertMsgState } from "$utils/atom";
 import { ButtonComponent } from "$components/ButtonComponent";
 
-export const System = () => {
+const System = () => {
   const setAlertMsg = useSetRecoilState(alertMsgState);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -15,6 +15,10 @@ export const System = () => {
     event.preventDefault();
     if (!username) {
       setAlertMsg("이름을 입력해주세요.");
+    } else if (!password) {
+      setAlertMsg("비밀번호를 입력해주세요.");
+    } else if (code !== process.env.REACT_APP_CODE) {
+      setAlertMsg("옳바르지 않은 접근입니다.");
     }
   };
   return (
@@ -60,14 +64,13 @@ export const System = () => {
     </SystemWrapper>
   );
 };
-
+export default System;
 const SystemWrapper = styled.div`
   display: flex;
-  gap: 40px;
+  gap: 50px;
   width: 100%;
   height: 100%;
-  padding-top: 30px;
-  padding-bottom: 15px;
+  padding: 15px 0;
 `;
 const Img = styled.div<{ src: string }>`
   width: 220px;
@@ -76,20 +79,19 @@ const Img = styled.div<{ src: string }>`
   background-size: contain;
   background-position: center;
 `;
+const ColBox = styled(FlexBox)`
+  flex-direction: column;
+  gap: 20px;
+  align-items: flex-start;
+  justify-content: center;
+  padding-top: 15px;
+  padding-right: 30px;
+  font-size: 14px;
+`;
 const Title = styled.div`
   font-family: "Retro";
   font-size: 16px;
 `;
 const SubTitle = styled.div`
   font-size: 13px;
-  font-weight: 600;
-`;
-const ColBox = styled(FlexBox)`
-  flex-direction: column;
-  gap: 20px;
-  align-items: flex-start;
-  padding-top: 15px;
-  padding-right: 30px;
-  font-size: 14px;
-  font-weight: 600;
 `;

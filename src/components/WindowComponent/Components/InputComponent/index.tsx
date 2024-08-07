@@ -39,7 +39,6 @@ const InputComponentContainer = styled.div`
 `;
 const Placeholder = styled.div`
   font-size: 13px;
-  font-weight: 600;
 `;
 const InputBox = styled.div<{ width: string }>`
   position: relative;

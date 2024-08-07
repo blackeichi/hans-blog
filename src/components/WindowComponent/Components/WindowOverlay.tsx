@@ -9,6 +9,7 @@ import {
 } from "$utils/constans";
 
 interface IWindowOverlay {
+  isProfile: boolean;
   windowState: TFolder;
   setWindowState: React.Dispatch<React.SetStateAction<TFolder>>;
   onChangeFolderState: (value?: TFolder) => void;
@@ -18,6 +19,7 @@ interface IWindowOverlay {
 
 export const WindowOverlay = ({
   children,
+  isProfile,
   windowState,
   setWindowState,
   onChangeFolderState,
@@ -53,7 +55,7 @@ export const WindowOverlay = ({
       }}
     >
       {children}
-      {!windowState.isMax && (
+      {!isProfile && !windowState.isMax && (
         <ResizeWindowBox
           {...boxResizeEvent(
             (deltaX, deltaY, maxWidth, maxHeight) => {
