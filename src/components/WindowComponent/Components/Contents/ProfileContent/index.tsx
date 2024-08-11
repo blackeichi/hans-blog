@@ -38,6 +38,7 @@ const ProfileMenuBox = styled.div`
   width: 100%;
   display: flex;
   font-size: 11px;
+  margin-top: 5px;
 `;
 const ProfileMenu = styled.div<{ isSelected: boolean }>`
   width: 100px;

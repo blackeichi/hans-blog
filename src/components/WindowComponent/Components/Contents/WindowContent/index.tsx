@@ -1,21 +1,16 @@
 import { WindowContentBox } from "$components/WindowComponent/styles";
-import { faCaretLeft, faCaretRight } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import styled from "styled-components";
-import { FlexBox } from "styles";
+import { WindowTopContent } from "./WindowTopContent";
 
 export const WindowContent = () => {
   return (
     <>
+      <WindowTopContent />
       <WindowContentBox>
         <Content>
           <TempBox />
         </Content>
       </WindowContentBox>
-      <PageBtnBox>
-        <FontAwesomeIcon fontSize="25px" icon={faCaretLeft} />
-        <FontAwesomeIcon fontSize="25px" icon={faCaretRight} />
-      </PageBtnBox>
     </>
   );
 };
@@ -27,11 +22,6 @@ const Content = styled.div`
   border-left: 1px solid ${(props) => props.theme.darkGray};
   outline: 4px solid ${(props) => props.theme.shadow};
   overflow-x: scroll;
-`;
-const PageBtnBox = styled(FlexBox)`
-  padding: 5px 10px;
-  color: ${(props) => props.theme.shadow};
-  gap: 10px;
 `;
 const TempBox = styled.div`
   width: 100%;

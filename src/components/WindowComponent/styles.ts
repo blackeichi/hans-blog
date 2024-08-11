@@ -32,8 +32,8 @@ export const WindowBox = styled(motion.div)<{
 export const WindowContentBox = styled.div`
   width: 100%;
   height: calc(100% - 65px);
-  padding: 10px;
-  padding-bottom: 5px;
+  padding: 5px 10px;
+  padding-top: 0px;
 `;
 
 export const ResizeWindowBox = styled.div`

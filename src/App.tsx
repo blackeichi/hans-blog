@@ -7,12 +7,14 @@ import { Layout } from "$components/Layout";
 import "./App.css";
 import { auth } from "fbase";
 import { AlertComponent } from "$components/AlertComponent";
+import { useRecoilState } from "recoil";
+import { isLoggedInState } from "$utils/atom";
 
 const HomePage = lazy(() => import("$routes/Home"));
 
 function App() {
   const [init, setInit] = useState<boolean>(false);
-  const [isLoggedIn, setIsLoggedIn] = useState<any>(auth.currentUser);
+  const [isLoggedIn, setIsLoggedIn] = useRecoilState<boolean>(isLoggedInState);
   useEffect(() => {
     auth.onAuthStateChanged((user) => {
       if (user) {

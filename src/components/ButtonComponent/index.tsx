@@ -10,6 +10,9 @@ export const ButtonComponent = ({
   height = "100%",
   type = "button",
   styles = {},
+  isShadow = true,
+  onBlur = () => {},
+  disabled = false,
 }: {
   content: React.ReactNode;
   action: (props?: any) => void;
@@ -17,6 +20,9 @@ export const ButtonComponent = ({
   height?: string;
   type?: "button" | "submit";
   styles?: object;
+  isShadow?: boolean;
+  disabled?: boolean;
+  onBlur?: () => void;
 }) => {
   return (
     <ButtonBox
@@ -24,28 +30,41 @@ export const ButtonComponent = ({
       width={width}
       height={height}
       type={type}
-      whileTap={{
-        borderTop: `2px solid ${GLOBAL_COLOR.darkGray}`,
-        borderLeft: `2px solid ${GLOBAL_COLOR.darkGray}`,
-        borderBottom: `2px solid ${GLOBAL_COLOR.darkGray}`,
-        borderRight: `2px solid ${GLOBAL_COLOR.darkGray}`,
-      }}
+      disabled={disabled}
+      whileTap={
+        disabled
+          ? {}
+          : {
+              borderTop: `2px solid ${GLOBAL_COLOR.darkGray}`,
+              borderLeft: `2px solid ${GLOBAL_COLOR.darkGray}`,
+              borderBottom: `2px solid ${GLOBAL_COLOR.darkGray}`,
+              borderRight: `2px solid ${GLOBAL_COLOR.darkGray}`,
+            }
+      }
       transition={{
         duration: 0,
       }}
       tabIndex={-1}
+      isShadow={isShadow}
+      onBlur={onBlur}
     >
       <Button
         onClick={() => {
-          action();
+          if (!disabled) {
+            action();
+          }
         }}
-        whileTap={{
-          padding: "1px",
-          border: "1px dashed gray",
-          fontSize: "12px",
-          width: "95%",
-          height: "95%",
-        }}
+        whileTap={
+          disabled
+            ? {}
+            : {
+                padding: "1px",
+                border: "1px dashed gray",
+                fontSize: "12px",
+                width: "95%",
+                height: "95%",
+              }
+        }
         transition={{
           duration: 0,
         }}
@@ -58,6 +77,7 @@ export const ButtonComponent = ({
 export const ButtonBox = styled(motion.button)<{
   width: string;
   height: string;
+  isShadow: boolean;
 }>`
   width: ${(props) => props.width};
   height: ${(props) => props.height};
@@ -65,10 +85,14 @@ export const ButtonBox = styled(motion.button)<{
   align-items: center;
   justify-content: center;
   background-color: ${(props) => props.theme.gray};
-  border-top: 2px solid ${(props) => props.theme.lightGray};
-  border-left: 2px solid ${(props) => props.theme.lightGray};
-  border-bottom: 2px solid ${(props) => props.theme.shadow};
-  border-right: 2px solid ${(props) => props.theme.shadow};
+  border-top: ${(props) =>
+    !props.isShadow ? "none" : `2px solid ${props.theme.lightGray}`};
+  border-left: ${(props) =>
+    !props.isShadow ? "none" : `2px solid ${props.theme.lightGray}`};
+  border-bottom: ${(props) =>
+    !props.isShadow ? "none" : `2px solid ${props.theme.shadow}`};
+  border-right: ${(props) =>
+    !props.isShadow ? "none" : `2px solid ${props.theme.shadow}`};
   text-shadow: 1px 1px gray;
 `;
 const Button = styled(motion.div)`

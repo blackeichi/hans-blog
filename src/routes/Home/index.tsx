@@ -15,7 +15,7 @@ import { HomeOverly } from "./Components/HomeOverlay/HomeOverlay";
 import { HandleActions } from "./handleActions";
 
 interface HomeProps {
-  isLoggedIn: any;
+  isLoggedIn: boolean;
 }
 
 const withHome = (Component: any) => {
@@ -31,7 +31,7 @@ const withHome = (Component: any) => {
         setFolderState(folderData);
       }
     }, []);
-    return <Component props={props} />;
+    return <Component {...props} />;
   };
 };
 
@@ -40,6 +40,7 @@ const Home = withHome(({ isLoggedIn }: HomeProps) => {
   const setMouseLocale = useSetRecoilState(mouseLocaleState);
   const setAction = useSetRecoilState(actionState);
   const setSize = useSetRecoilState(sizeState);
+  console.log("isLoggedIn", isLoggedIn);
   return (
     <>
       <HandleActions />

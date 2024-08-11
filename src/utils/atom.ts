@@ -44,3 +44,9 @@ export const alertMsgState = atom<string | null>({
   key: "alertMsgState",
   default: null,
 });
+
+// 로그인 여부
+export const isLoggedInState = atom<boolean>({
+  key: "isLoggedInState",
+  default: false,
+});

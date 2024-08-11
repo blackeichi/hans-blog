@@ -5,8 +5,8 @@ import { folderState } from "$utils/atom";
 import { useSetRecoilState } from "recoil";
 import { TASK_LIST, TASK_STATE } from "$routes/Home/constants";
 import { ProfileContent } from "./Components/Contents/ProfileContent";
-import { WindowContent } from "./Components/Contents/WindowContent";
 import { WindowTitle } from "./Components/WindowTitle";
+import { WindowContent } from "./Components/Contents/WindowContent";
 
 interface WindowProps {
   item: TFolder;

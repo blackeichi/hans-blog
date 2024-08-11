@@ -2,65 +2,98 @@ import { useState } from "react";
 import { InputComponent } from "$components/WindowComponent/Components/InputComponent";
 import { styled } from "styled-components";
 import { FlexBox } from "styles";
-import { useSetRecoilState } from "recoil";
-import { alertMsgState } from "$utils/atom";
+import { useRecoilValue, useSetRecoilState } from "recoil";
+import { alertMsgState, isLoggedInState } from "$utils/atom";
 import { ButtonComponent } from "$components/ButtonComponent";
+import { signInWithEmailAndPassword, signOut } from "firebase/auth";
+import { auth } from "fbase";
 
 const System = () => {
   const setAlertMsg = useSetRecoilState(alertMsgState);
+  const isLoggedIn = useRecoilValue<boolean>(isLoggedInState);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [code, setCode] = useState("");
-  const handleSubmit = (event: React.FormEvent) => {
+  const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
-    if (!username) {
-      setAlertMsg("이름을 입력해주세요.");
-    } else if (!password) {
-      setAlertMsg("비밀번호를 입력해주세요.");
-    } else if (code !== process.env.REACT_APP_CODE) {
-      setAlertMsg("옳바르지 않은 접근입니다.");
+    try {
+      if (!username) {
+        setAlertMsg("이름을 입력해주세요.");
+      } else if (!password) {
+        setAlertMsg("비밀번호를 입력해주세요.");
+      } else if (code !== process.env.REACT_APP_CODE) {
+        setAlertMsg("옳바르지 않은 접근입니다.");
+      } else {
+        await signInWithEmailAndPassword(auth, username, password);
+        setUsername("");
+        setPassword("");
+        setCode("");
+      }
+    } catch (error) {
+      console.log(error);
     }
   };
   return (
     <SystemWrapper>
       <Img src="/images/registerImg.png" />
-      <ColBox as="form" onSubmit={handleSubmit}>
-        <Title>LOGIN</Title>
-        <SubTitle>
-          아래에 이름과 비밀번호를 입력하십시오. 코드는 원하는 경우에만
-          입력하십시오.
-        </SubTitle>
-        <InputComponent
-          name="id"
-          placeholder="이 름 :"
-          text={username}
-          setText={setUsername}
-        />
-        <InputComponent
-          name="password"
-          placeholder="비 밀 번 호 :"
-          type="password"
-          text={password}
-          setText={setPassword}
-        />
-        <InputComponent
-          name="code"
-          placeholder="코드"
-          type="password"
-          text={code}
-          setText={setCode}
-        />
-        <ButtonComponent
-          content={<span>확 인</span>}
-          action={() => {}}
-          width="60px"
-          height="35px"
-          type="submit"
-          styles={{
-            marginTop: "10px",
+      {isLoggedIn ? (
+        <ColBox
+          style={{
+            width: "470px",
+            alignItems: "center",
           }}
-        />
-      </ColBox>
+        >
+          <ButtonComponent
+            content={<span>로 그 아 웃</span>}
+            action={async () => {
+              await signOut(auth);
+            }}
+            width="200px"
+            height="60px"
+            styles={{
+              marginBottom: "150px",
+            }}
+          />
+        </ColBox>
+      ) : (
+        <ColBox as="form" onSubmit={handleSubmit}>
+          <Title>LOGIN</Title>
+          <SubTitle>
+            아래에 이름과 비밀번호를 입력하십시오. 코드는 원하는 경우에만
+            입력하십시오.
+          </SubTitle>
+          <InputComponent
+            name="id"
+            placeholder="이 름 :"
+            text={username}
+            setText={setUsername}
+          />
+          <InputComponent
+            name="password"
+            placeholder="비 밀 번 호 :"
+            type="password"
+            text={password}
+            setText={setPassword}
+          />
+          <InputComponent
+            name="code"
+            placeholder="코드"
+            type="password"
+            text={code}
+            setText={setCode}
+          />
+          <ButtonComponent
+            content={<span>확 인</span>}
+            action={() => {}}
+            width="60px"
+            height="35px"
+            type="submit"
+            styles={{
+              marginTop: "10px",
+            }}
+          />
+        </ColBox>
+      )}
     </SystemWrapper>
   );
 };
@@ -78,6 +111,7 @@ const Img = styled.div<{ src: string }>`
   background-image: ${(props) => `url(${props.src})`};
   background-size: contain;
   background-position: center;
+  flex-shrink: 0;
 `;
 const ColBox = styled(FlexBox)`
   flex-direction: column;
