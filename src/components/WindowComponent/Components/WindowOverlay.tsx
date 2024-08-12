@@ -1,6 +1,6 @@
 import { ResizeWindowBox, WindowBox } from "../styles";
 import { TFolder } from "$utils/types";
-import boxResizeEvent from "$utils/libs/etcLibs";
+import boxResizeEvent from "$utils/libs/eventLibs";
 import { TASK_STATE } from "$routes/Home/constants";
 import {
   FOLDER_MIN_HEIGHT,

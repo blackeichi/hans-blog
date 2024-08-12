@@ -13,6 +13,7 @@ import { TASK_ICONS } from "./constants";
 import { HomeIcon } from "./Components/HomeIcon";
 import { HomeOverly } from "./Components/HomeOverlay/HomeOverlay";
 import { HandleActions } from "./handleActions";
+import { sesstionStorageLibs } from "$utils/libs/storagesLibs";
 
 interface HomeProps {
   isLoggedIn: boolean;
@@ -20,12 +21,13 @@ interface HomeProps {
 
 const withHome = (Component: any) => {
   return (props: HomeProps) => {
+    const savedFolderState = sesstionStorageLibs.getFolderState();
     const setFolderState = useSetRecoilState(folderState);
     const { search } = useLocation();
     const searchData = Object.fromEntries(new URLSearchParams(search));
     const folderData = searchData?.folder
       ? JSON.parse(searchData?.folder)
-      : null;
+      : savedFolderState || null;
     useEffect(() => {
       if (folderData) {
         setFolderState(folderData);
@@ -40,7 +42,6 @@ const Home = withHome(({ isLoggedIn }: HomeProps) => {
   const setMouseLocale = useSetRecoilState(mouseLocaleState);
   const setAction = useSetRecoilState(actionState);
   const setSize = useSetRecoilState(sizeState);
-  console.log("isLoggedIn", isLoggedIn);
   return (
     <>
       <HandleActions />
