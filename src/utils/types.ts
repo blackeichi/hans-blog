@@ -29,3 +29,8 @@ export type TDragState = {
   startY: number;
   endY?: number | undefined;
 } | null;
+
+export type TTaskState = {
+  title: string;
+  isMain: boolean;
+};

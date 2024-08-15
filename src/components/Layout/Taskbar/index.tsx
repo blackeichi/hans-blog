@@ -4,6 +4,7 @@ import { TaskbarBlankBox, TaskbarSeparator } from "./components";
 import { FlexBox } from "styles";
 import { TaskBarClock } from "./TaskBarClock";
 import { TASK_BAR_HEIGHT } from "$utils/constans";
+import { Tasks } from "./Tasks";
 
 export const Taskbar = () => {
   return (
@@ -13,6 +14,7 @@ export const Taskbar = () => {
         <TaskbarBlankBox />
         <TaskbarSeparator />
         <TaskbarBlankBox />
+        <Tasks />
       </Box>
       <Box>
         <TaskbarSeparator />
