@@ -29,7 +29,7 @@ const Modal = styled.div<{
   display: ${(props) => (props.open ? "flex" : "none")};
   align-items: center;
   justify-content: center;
-  z-index: 1000;
+  z-index: 100;
 `;
 const OverlayBox = styled.div`
   width: 100%;

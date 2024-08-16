@@ -6,8 +6,8 @@ import {
   WindowContentBox,
   WindowTitleBox,
 } from "$components/WindowComponent/styles";
-import { useEffect } from "react";
-import { useQuill } from "react-quilljs";
+import { useEffect, useState } from "react";
+import ReactQuill from "react-quill";
 import { useNavigate } from "react-router-dom";
 import { styled } from "styled-components";
 import { FlexBox } from "styles";
@@ -23,17 +23,10 @@ const Add = ({ isLoggedIn }: AddProps) => {
       navigate("/");
     }
   }, []);
-  const { quill, quillRef } = useQuill();
-  useEffect(() => {
-    if (quill) {
-      quill.clipboard.dangerouslyPasteHTML("<h1>React Hook for Quill!</h1>");
-    }
-  }, [quill]);
+  const [value, setValue] = useState("");
+  console.log(value);
   return (
-    <>
-      <div style={{ width: "500px", height: "500px", zIndex: 100 }}>
-        <div ref={quillRef} />
-      </div>
+    <AddWrapper>
       <WindowBox
         index={0}
         item={{
@@ -55,18 +48,29 @@ const Add = ({ isLoggedIn }: AddProps) => {
         </WindowTitleBox>
         <WindowContentBox
           style={{
-            paddingTop: "15px",
+            height: "calc(100% - 35px)",
+            paddingTop: "10px",
           }}
         >
-          <Content></Content>
+          <Content>
+            <ReactQuill theme="snow" value={value} onChange={setValue} />
+          </Content>
         </WindowContentBox>
       </WindowBox>
-    </>
+    </AddWrapper>
   );
 };
 
 export default Add;
 
+const AddWrapper = styled.div`
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 200;
+`;
 const Content = styled.div`
   width: 100%;
   height: 100%;

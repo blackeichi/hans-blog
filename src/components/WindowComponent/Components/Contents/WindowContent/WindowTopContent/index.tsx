@@ -8,6 +8,7 @@ import { useRecoilValue } from "recoil";
 import styled from "styled-components";
 import { FlexBox } from "styles";
 import { MenuComponent } from "./MenuComponent";
+import { GLOBAL_COLOR } from "$utils/constans";
 
 export const WindowTopContent = () => {
   const isLoggedIn = useRecoilValue<boolean>(isLoggedInState);
@@ -26,6 +27,12 @@ export const WindowTopContent = () => {
           isShadow={false}
           onBlur={() => setOpen(false)}
           disabled={!isLoggedIn}
+          styles={{
+            borderTop: `2px solid ${GLOBAL_COLOR.lightGray}`,
+            borderLeft: `2px solid ${GLOBAL_COLOR.lightGray}`,
+            borderBottom: `2px solid ${GLOBAL_COLOR.gray}`,
+            borderRight: `2px solid ${GLOBAL_COLOR.gray}`,
+          }}
         />
         {open && <MenuComponent />}
       </PageBtnBox>

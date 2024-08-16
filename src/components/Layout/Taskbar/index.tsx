@@ -41,7 +41,7 @@ const TaskbarBox = styled.div<{ height: number }>`
   justify-content: space-between;
   gap: 3px;
 
-  z-index: 1000;
+  z-index: 100;
 `;
 const Box = styled(FlexBox)`
   gap: 3px;
