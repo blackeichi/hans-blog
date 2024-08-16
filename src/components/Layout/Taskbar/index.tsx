@@ -1,24 +1,28 @@
 import { styled } from "styled-components";
-import { TaskMenuIcon } from "./TaskMenuIcon";
+import { TaskIconComponent } from "./TaskIconComponent";
 import { TaskbarBlankBox, TaskbarSeparator } from "./components";
 import { FlexBox } from "styles";
-import { TaskBarClock } from "./TaskBarClock";
+import { TaskClockComponent } from "./TaskClockComponent";
 import { TASK_BAR_HEIGHT } from "$utils/constans";
-import { Tasks } from "./Tasks";
+import { TasksComponent } from "./TasksComponent";
 
 export const Taskbar = () => {
   return (
     <TaskbarBox height={TASK_BAR_HEIGHT}>
-      <Box>
-        <TaskMenuIcon />
+      <Box
+        style={{
+          width: "100%",
+        }}
+      >
+        <TaskIconComponent />
         <TaskbarBlankBox />
         <TaskbarSeparator />
         <TaskbarBlankBox />
-        <Tasks />
+        <TasksComponent />
       </Box>
       <Box>
         <TaskbarSeparator />
-        <TaskBarClock />
+        <TaskClockComponent />
       </Box>
     </TaskbarBox>
   );
@@ -35,7 +39,8 @@ const TaskbarBox = styled.div<{ height: number }>`
   padding: 2px 4px;
   display: flex;
   justify-content: space-between;
-  font-family: "Retro";
+  gap: 3px;
+
   z-index: 1000;
 `;
 const Box = styled(FlexBox)`

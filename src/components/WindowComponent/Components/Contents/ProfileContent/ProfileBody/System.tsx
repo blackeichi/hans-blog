@@ -30,7 +30,6 @@ const System = () => {
         setCode("");
       }
     } catch (error) {
-      console.log(error);
       setAlertMsg("이름 또는 비밀번호가 일치하지 않습니다.");
     }
   };

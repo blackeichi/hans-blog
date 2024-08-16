@@ -6,7 +6,7 @@ import { HandleOpenState } from "$components/Common/handleOpenState";
 
 const ID = "TaskMenuIcon";
 
-export const TaskMenuIcon = () => {
+export const TaskIconComponent = () => {
   const [open, setOpen] = useState<boolean>(false);
   const setSelected = useSetRecoilState(selectedState);
   const handleTaskMenu = (event: React.MouseEvent<HTMLElement>) => {
@@ -39,13 +39,15 @@ const TaskMenuBox = styled.div<{ open: boolean }>`
   padding: ${(props) => (props.open ? "2px" : "1px")};
   width: 90px;
   overflow: hidden;
+  font-family: "Retro";
+  flex-shrink: 0;
 `;
 const TapBox = styled.div<{ open: boolean }>`
   display: flex;
-  width: fit-content;
+  width: 100%;
   align-items: center;
   justify-content: center;
-  font-size: 10px;
+  font-size: 9px;
   gap: 5px;
   box-sizing: border-box;
   border: ${(props) => (props.open ? "1px dotted gray" : "none")};
