@@ -27,12 +27,6 @@ export const WindowTopContent = () => {
           isShadow={false}
           onBlur={() => setOpen(false)}
           disabled={!isLoggedIn}
-          styles={{
-            borderTop: `2px solid ${GLOBAL_COLOR.lightGray}`,
-            borderLeft: `2px solid ${GLOBAL_COLOR.lightGray}`,
-            borderBottom: `2px solid ${GLOBAL_COLOR.gray}`,
-            borderRight: `2px solid ${GLOBAL_COLOR.gray}`,
-          }}
         />
         {open && <MenuComponent />}
       </PageBtnBox>
