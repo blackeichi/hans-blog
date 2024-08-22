@@ -22,7 +22,6 @@ export const AddContent = ({
 }) => {
   const [title, setTitle] = useState("");
   const [value, setValue] = useState("");
-  console.log(value);
   return (
     <AddWrapper>
       <WindowBox
@@ -79,7 +78,7 @@ const AddWrapper = styled.div`
   left: 0;
   top: 0;
   width: 100vw;
-  height: 100vh;
+  height: calc(100vh - 30px);
   z-index: 200;
 `;
 const Content = styled.div`
