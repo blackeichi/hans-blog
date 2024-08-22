@@ -1,7 +1,7 @@
-import { WindowContentBox } from "$components/WindowComponent/styles";
 import { useState } from "react";
 import styled from "styled-components";
 import { ProfileBody } from "./ProfileBody";
+import { WindowContentBox } from "../../../styles";
 
 export const ProfileContent = () => {
   const [selectedMenu, setSelectedMenu] = useState<1 | 2>(1);

@@ -1,6 +1,6 @@
-import { WindowContentBox } from "$components/WindowComponent/styles";
 import styled from "styled-components";
 import { WindowTopContent } from "./WindowTopContent";
+import { WindowContentBox } from "../../../styles";
 
 export const WindowContent = () => {
   return (

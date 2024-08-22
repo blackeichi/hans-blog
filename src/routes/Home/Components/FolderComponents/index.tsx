@@ -1,9 +1,9 @@
-import { WindowComponent } from "$components/WindowComponent";
 import { folderState } from "$utils/atom";
 import { useDidMountEffect } from "$utils/hooks/useDidMountEffect";
 import { AnimatePresence } from "framer-motion";
 import { memo } from "react";
 import { useRecoilValue } from "recoil";
+import { WindowComponent } from "./WindowComponent";
 
 export const FolderComponents = memo(() => {
   const folders = useRecoilValue(folderState);

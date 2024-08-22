@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { InputComponent } from "$components/WindowComponent/Components/InputComponent";
 import { styled } from "styled-components";
 import { FlexBox } from "styles";
 import { useRecoilValue, useSetRecoilState } from "recoil";
@@ -7,6 +6,7 @@ import { alertMsgState, isLoggedInState } from "$utils/atom";
 import { ButtonComponent } from "$components/ButtonComponent";
 import { signInWithEmailAndPassword, signOut } from "firebase/auth";
 import { auth } from "fbase";
+import { InputComponent } from "../../../InputComponent";
 
 const System = () => {
   const setAlertMsg = useSetRecoilState(alertMsgState);

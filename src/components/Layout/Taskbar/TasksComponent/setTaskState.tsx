@@ -48,6 +48,8 @@ export const SetTaskState = ({
           }
         }
       }
+    } else {
+      setTaskState([]);
     }
   }, [folders]);
   return <></>;
