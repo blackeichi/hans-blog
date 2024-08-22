@@ -104,7 +104,12 @@ const Add = ({ isLoggedIn }: AddProps) => {
   }, []);
   return (
     <>
-      <AddContent navigate={navigate} modules={modules} quillRef={quillRef} />
+      <AddContent
+        navigate={navigate}
+        modules={modules}
+        quillRef={quillRef}
+        pageSize={pageSize}
+      />
       <BtnWrapper>
         <BtnBox>
           <ButtonComponent
