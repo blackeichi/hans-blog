@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState, useRef, useCallback } from "react";
 import ReactQuill from "react-quill";
 import { useNavigate } from "react-router-dom";
-import { storage } from "fbase";
+import { db, storage } from "fbase";
 import {
   deleteObject,
   getDownloadURL,
@@ -13,6 +13,7 @@ import { useSetRecoilState } from "recoil";
 import { AddContent } from "./AddContent";
 import { styled } from "styled-components";
 import { ButtonComponent } from "$components/ButtonComponent";
+import { doc, setDoc } from "firebase/firestore";
 
 interface AddProps {
   isLoggedIn: boolean;
@@ -102,6 +103,13 @@ const Add = ({ isLoggedIn }: AddProps) => {
       window.removeEventListener("resize", handleResize);
     };
   }, []);
+  const onSubmit = async () => {
+    await setDoc(doc(db, "post", "LA"), {
+      name: "Los Angeles",
+      state: "CA",
+      country: "USA",
+    });
+  };
   return (
     <>
       <AddContent

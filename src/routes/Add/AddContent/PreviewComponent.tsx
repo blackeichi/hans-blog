@@ -1,17 +1,15 @@
 import { styled } from "styled-components";
-import sanitizeHtml from "sanitize-html";
-import { ALLOWED_QUILL } from "$utils/constans";
+import DOMPurify from "dompurify";
+import { memo } from "react";
 
-export const PreviewComponent = ({ value }: { value: string }) => {
-  const cleanedValue = sanitizeHtml(value, ALLOWED_QUILL);
-  console.log(value, cleanedValue);
+export const PreviewComponent = memo(({ value }: { value: string }) => {
   return (
     <PreviewWrapper
       className="ql-editor"
-      dangerouslySetInnerHTML={{ __html: cleanedValue }}
+      dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(value) }}
     ></PreviewWrapper>
   );
-};
+});
 
 const PreviewWrapper = styled.div`
   width: 50%;
