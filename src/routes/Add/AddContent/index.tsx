@@ -17,11 +17,13 @@ export const AddContent = ({
   modules,
   quillRef,
   pageSize,
+  images,
 }: {
   navigate: any;
   modules: any;
   quillRef: any;
   pageSize: number;
+  images: any;
 }) => {
   const [title, setTitle] = useState("");
   const [value, setValue] = useState("");

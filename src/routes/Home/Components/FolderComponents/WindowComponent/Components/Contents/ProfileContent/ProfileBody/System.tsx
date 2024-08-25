@@ -7,6 +7,7 @@ import { ButtonComponent } from "$components/ButtonComponent";
 import { signInWithEmailAndPassword, signOut } from "firebase/auth";
 import { auth } from "fbase";
 import { InputComponent } from "../../../InputComponent";
+import { returnVerify } from "$routes/Home/utils";
 
 const System = () => {
   const setAlertMsg = useSetRecoilState(alertMsgState);
@@ -21,7 +22,7 @@ const System = () => {
         setAlertMsg("이름을 입력해주세요.");
       } else if (!password) {
         setAlertMsg("비밀번호를 입력해주세요.");
-      } else if (code !== process.env.REACT_APP_CODE) {
+      } else if (!returnVerify(code)) {
         setAlertMsg("옳바르지 않은 접근입니다.");
       } else {
         await signInWithEmailAndPassword(auth, username, password);
