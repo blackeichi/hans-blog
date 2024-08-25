@@ -11,6 +11,7 @@ import { styled } from "styled-components";
 import { FlexBox } from "styles";
 import { PostInputComponent } from "./PostInputComponent";
 import { PreviewComponent } from "./PreviewComponent";
+import { SubmitButton } from "./SubmitButton";
 
 export const AddContent = ({
   navigate,
@@ -27,6 +28,8 @@ export const AddContent = ({
 }) => {
   const [title, setTitle] = useState("");
   const [value, setValue] = useState("");
+  const [mainTag, setMainTag] = useState("");
+  const [tags, setTags] = useState([]);
   return (
     <AddWrapper>
       <WindowBox
@@ -68,6 +71,12 @@ export const AddContent = ({
           {pageSize >= 800 && <PreviewComponent value={value} />}
         </WindowContentBox>
       </WindowBox>
+      <SubmitButton
+        images={images}
+        navigate={navigate}
+        title={title}
+        value={value}
+      />
     </AddWrapper>
   );
 };

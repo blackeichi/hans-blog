@@ -1,19 +1,40 @@
+import { ButtonComponent } from "$components/ButtonComponent";
+import { alertMsgState } from "$utils/atom";
+import { db } from "fbase";
+import { doc, setDoc } from "firebase/firestore";
+import { deleteObject } from "firebase/storage";
+import { useSetRecoilState } from "recoil";
 import styled from "styled-components";
 
-export const SubmitButton = () => {
+export const SubmitButton = ({
+  navigate,
+  images,
+  title,
+  value,
+}: {
+  navigate: any;
+  images: any;
+  title: string;
+  value: string;
+}) => {
+  const setAlertMsg = useSetRecoilState(alertMsgState);
   const onSubmit = async () => {
-    await setDoc(doc(db, "post", "LA"), {
-      title,
-      state: "CA",
-      country: "USA",
-    });
+    if (!title || !value) {
+      setAlertMsg("제목과 내용은 필수 입력입니다.");
+    } else {
+      await setDoc(doc(db, "post", "js"), {
+        title,
+        value,
+      });
+      // navigate("/");
+    }
   };
   return (
     <BtnWrapper>
       <BtnBox>
         <ButtonComponent
           action={async () => {
-            images.forEach((img) => deleteObject(img));
+            images.forEach((img: any) => deleteObject(img));
             navigate("/");
           }}
           content={<span>취 소</span>}
@@ -22,7 +43,7 @@ export const SubmitButton = () => {
         />
         <ButtonComponent
           action={() => {
-            navigate("/");
+            onSubmit();
           }}
           content={<span>저 장</span>}
           width="60px"
