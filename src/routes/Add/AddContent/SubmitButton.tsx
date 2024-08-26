@@ -11,22 +11,25 @@ export const SubmitButton = ({
   images,
   title,
   value,
-}: {
-  navigate: any;
-  images: any;
-  title: string;
-  value: string;
-}) => {
+  maintag,
+  tags,
+}: any) => {
   const setAlertMsg = useSetRecoilState(alertMsgState);
   const onSubmit = async () => {
     if (!title || !value) {
       setAlertMsg("제목과 내용은 필수 입력입니다.");
+    } else if (!maintag) {
+      setAlertMsg("메인 태그 입력은 필수입니다.");
     } else {
-      await setDoc(doc(db, "post", "js"), {
+      await setDoc(doc(db, "post", maintag), {
         title,
         value,
+        tags,
       });
-      // navigate("/");
+      await setDoc(doc(db, "tags", maintag), {
+        tags,
+      });
+      navigate("/");
     }
   };
   return (
@@ -34,7 +37,7 @@ export const SubmitButton = ({
       <BtnBox>
         <ButtonComponent
           action={async () => {
-            images.forEach((img: any) => deleteObject(img));
+            await images.forEach((img: any) => deleteObject(img));
             navigate("/");
           }}
           content={<span>취 소</span>}

@@ -1,7 +1,6 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { EachOption } from "./EachOption";
 import { ClickSelect } from "./ClickSelect";
-import { useDidMountEffect } from "$utils/hooks/useDidMountEffect";
 import {
   AutoCompleteComponentBox,
   OptionListBox,
@@ -41,12 +40,15 @@ export const AutoCompleteComponent = ({
     x: number;
     y: number;
   }>(null);
-  const [filteredOptions, setFilteredOptions] = useState(options);
-  useDidMountEffect(() => {
+  const [filteredOptions, setFilteredOptions] = useState<string[]>([]);
+  useEffect(() => {
     if (!isFocus) {
       setText("");
     }
   }, [isFocus]);
+  useEffect(() => {
+    setFilteredOptions(options);
+  }, [options]);
   const handleClickOption = (event: any, selected: Boolean, item: string) => {
     event.stopPropagation();
     if (isMulti) {
@@ -85,7 +87,7 @@ export const AutoCompleteComponent = ({
           <OptionListBox
             style={{
               top: isDown
-                ? `calc(${position.y}px + ${height} + 5px)`
+                ? `calc(${position.y}px + ${height})`
                 : `calc(${position.y}px - ${
                     filteredOptions.length * 35 > 350
                       ? 350

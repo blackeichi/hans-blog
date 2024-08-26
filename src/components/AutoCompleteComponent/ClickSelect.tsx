@@ -30,7 +30,9 @@ export const ClickSelect = memo(
       setFilteredOptions(filtered);
     };
     useEffect(() => {
-      handleSearchCompany();
+      if (text) {
+        handleSearchCompany();
+      }
     }, [text]);
     useDidMountEffect(() => {
       if (!isOverlay) {

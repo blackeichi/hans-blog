@@ -19,16 +19,12 @@ export const AddContent = ({
   quillRef,
   pageSize,
   images,
-}: {
-  navigate: any;
-  modules: any;
-  quillRef: any;
-  pageSize: number;
-  images: any;
-}) => {
+  mainTagOptions,
+  setMainTagOptions,
+}: any) => {
   const [title, setTitle] = useState("");
   const [value, setValue] = useState("");
-  const [mainTag, setMainTag] = useState("");
+  const [maintag, setMainTag] = useState<string[]>([]);
   const [tags, setTags] = useState([]);
   return (
     <AddWrapper>
@@ -67,6 +63,12 @@ export const AddContent = ({
             modules={modules}
             setValue={setValue}
             quillRef={quillRef}
+            mainTagOptions={mainTagOptions}
+            setMainTagOptions={setMainTagOptions}
+            maintag={maintag}
+            setMainTag={setMainTag}
+            tags={tags}
+            setTags={setTags}
           />
           {pageSize >= 800 && <PreviewComponent value={value} />}
         </WindowContentBox>
@@ -76,6 +78,8 @@ export const AddContent = ({
         navigate={navigate}
         title={title}
         value={value}
+        maintag={maintag}
+        tags={tags}
       />
     </AddWrapper>
   );

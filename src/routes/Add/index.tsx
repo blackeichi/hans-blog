@@ -1,11 +1,12 @@
 import { useEffect, useMemo, useState, useRef, useCallback } from "react";
 import ReactQuill from "react-quill";
 import { useNavigate } from "react-router-dom";
-import { storage } from "fbase";
+import { db, storage } from "fbase";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import { alertMsgState } from "$utils/atom";
 import { useSetRecoilState } from "recoil";
 import { AddContent } from "./AddContent";
+import { collection, getDocs } from "firebase/firestore";
 
 interface AddProps {
   isLoggedIn: boolean;
@@ -20,7 +21,19 @@ const Add = ({ isLoggedIn }: AddProps) => {
   }, []);
   const setAlertMsg = useSetRecoilState(alertMsgState);
   const quillRef = useRef<ReactQuill>(null);
+  const [mainTagOptions, setMainTagOptions] = useState<string[]>([]);
   const [images, setImages] = useState<any[]>([]);
+  const getDatas = async () => {
+    const querySnapshot = await getDocs(collection(db, "post"));
+    const opList: string[] = [];
+    querySnapshot.forEach((doc) => opList.push(doc.id));
+    setMainTagOptions(opList);
+  };
+  useEffect(() => {
+    if (mainTagOptions.length === 0) {
+      getDatas();
+    }
+  }, []);
   const handleImageUpload = useCallback(
     async (file: File | null) => {
       if (!file) {
@@ -103,6 +116,8 @@ const Add = ({ isLoggedIn }: AddProps) => {
       quillRef={quillRef}
       pageSize={pageSize}
       images={images}
+      mainTagOptions={mainTagOptions}
+      setMainTagOptions={setMainTagOptions}
     />
   );
 };

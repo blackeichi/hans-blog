@@ -7,6 +7,7 @@ interface InputComponentProps {
   text: string;
   width?: string;
   setText: React.Dispatch<React.SetStateAction<string>>;
+  noLabel?: Boolean;
 }
 
 export const InputComponent = ({
@@ -16,15 +17,17 @@ export const InputComponent = ({
   text,
   width = "250px",
   setText,
+  noLabel = false,
 }: InputComponentProps) => {
   return (
-    <InputComponentContainer>
-      <Placeholder>{placeholder}</Placeholder>
-      <InputBox width={width}>
+    <InputComponentContainer width={width}>
+      {!noLabel && <Placeholder>{placeholder}</Placeholder>}
+      <InputBox>
         <Input
           name={name}
           type={type}
           value={text}
+          placeholder={noLabel ? placeholder : ""}
           onChange={(event) => setText(event.target.value)}
         />
       </InputBox>
@@ -32,18 +35,20 @@ export const InputComponent = ({
   );
 };
 
-const InputComponentContainer = styled.div`
+const InputComponentContainer = styled.div<{ width: string }>`
   display: flex;
   flex-direction: column;
+  box-sizing: border-box;
   gap: 5px;
+  width: ${(props) => props.width};
 `;
 const Placeholder = styled.div`
   font-size: 13px;
 `;
-const InputBox = styled.div<{ width: string }>`
+const InputBox = styled.div`
   position: relative;
-  height: 23px;
-  width: ${(props) => props.width};
+  height: 28px;
+  width: 100%;
 `;
 const Input = styled.input`
   outline: none;
@@ -54,4 +59,5 @@ const Input = styled.input`
   border-left: 2px solid ${(props) => props.theme.darkGray};
   border-bottom: 2px solid ${(props) => props.theme.lightGray};
   border-right: 2px solid ${(props) => props.theme.lightGray};
+  box-sizing: border-box;
 `;
