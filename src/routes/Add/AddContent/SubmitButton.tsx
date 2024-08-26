@@ -18,15 +18,15 @@ export const SubmitButton = ({
   const onSubmit = async () => {
     if (!title || !value) {
       setAlertMsg("제목과 내용은 필수 입력입니다.");
-    } else if (!maintag) {
+    } else if (!maintag[0]) {
       setAlertMsg("메인 태그 입력은 필수입니다.");
     } else {
-      await setDoc(doc(db, "post", maintag), {
+      await setDoc(doc(db, "posts", maintag[0]), {
         title,
         value,
         tags,
       });
-      await setDoc(doc(db, "tags", maintag), {
+      await setDoc(doc(db, "tags", maintag[0]), {
         tags,
       });
       navigate("/");

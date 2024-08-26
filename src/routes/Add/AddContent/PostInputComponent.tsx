@@ -11,9 +11,9 @@ export const PostInputComponent = ({
   setValue,
   quillRef,
   mainTagOptions,
-  setMainTag,
+  setMainTagOptions,
   maintag,
-  setSelectedMainTag,
+  setMainTag,
   tags,
   setTags,
 }: any) => {
@@ -38,7 +38,7 @@ export const PostInputComponent = ({
         {maintag.length > 0 && (
           <MainTag
             onClick={() => {
-              setSelectedMainTag([]);
+              setMainTag([]);
               setTags([]);
             }}
           >
@@ -51,8 +51,8 @@ export const PostInputComponent = ({
           id="mainTags"
           value={maintag}
           label="메인 태그"
-          onChange={(data: string[]) => setSelectedMainTag(data)}
-          onChangeOptions={setMainTag}
+          onChange={(data: string[]) => setMainTag(data)}
+          onChangeOptions={setMainTagOptions}
           options={mainTagOptions}
           width="100%"
         />
