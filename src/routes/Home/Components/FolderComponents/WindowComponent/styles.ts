@@ -32,7 +32,7 @@ export const WindowBox = styled(motion.div)<{
 export const WindowContentBox = styled.div`
   width: 100%;
   height: calc(100% - 65px);
-  padding: 5px 10px;
+  padding: 15px;
   padding-top: 0px;
 `;
 
@@ -47,6 +47,7 @@ export const ResizeWindowBox = styled.div`
   right: -2px;
   bottom: -2px;
   cursor: nwse-resize;
+  z-index: 1000;
 `;
 
 export const WindowTitleBox = styled.div`

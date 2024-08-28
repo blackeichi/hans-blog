@@ -14,7 +14,7 @@ export const AutoCompleteComponent = ({
   onChange,
   options = [],
   label,
-  onChangeOptions = () => {},
+  addNewOption = () => {},
   disabled = false,
   isMulti = false,
   width = "200px",
@@ -24,7 +24,7 @@ export const AutoCompleteComponent = ({
   id: string;
   value: string[];
   onChange: (data: string[]) => void;
-  onChangeOptions?: (data: string[]) => void;
+  addNewOption?: (data: string) => void;
   options: string[];
   label: string;
   disabled?: Boolean;
@@ -41,6 +41,7 @@ export const AutoCompleteComponent = ({
     y: number;
   }>(null);
   const [filteredOptions, setFilteredOptions] = useState<string[]>([]);
+  console.log("filteredOptions", text, filteredOptions);
   useEffect(() => {
     if (!isFocus) {
       setText("");
@@ -49,13 +50,12 @@ export const AutoCompleteComponent = ({
   useEffect(() => {
     setFilteredOptions(options);
   }, [options]);
-  const handleClickOption = (event: any, selected: Boolean, item: string) => {
+  const handleClickOption = (event: any, item: string) => {
     event.stopPropagation();
     if (isMulti) {
-      const newData = selected
-        ? value.filter((val: string) => val !== item)
-        : [...value, item];
-      onChange(newData);
+      const newData = new Set([...value, item]);
+      onChange(Array.from(newData));
+      setText("");
     } else {
       event.stopPropagation();
       onChange([item]);
@@ -93,7 +93,7 @@ export const AutoCompleteComponent = ({
                       ? 350
                       : filteredOptions.length * 35
                   }px - 10px)`,
-              left: position.x + 10,
+              left: position.x,
             }}
           >
             <OptionsList fontSize={fontSize}>
@@ -102,13 +102,9 @@ export const AutoCompleteComponent = ({
                   value={value}
                   item={text}
                   isMulti={isMulti}
-                  handleClickOption={(
-                    event: any,
-                    selected: Boolean,
-                    item: string
-                  ) => {
-                    handleClickOption(event, selected, item);
-                    onChangeOptions([item, ...options]);
+                  handleClickOption={(event: any, item: string) => {
+                    handleClickOption(event, item);
+                    addNewOption(item);
                   }}
                 />
               )}

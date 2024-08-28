@@ -1,2 +1,0 @@
-Suspense callback 알아보기
-전체화면 넣기

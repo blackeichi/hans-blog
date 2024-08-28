@@ -1,4 +1,4 @@
-import { GLOBAL_COLOR } from "$utils/constans";
+import { GLOBAL_COLOR } from "$utils/constants";
 import { useNavigateWithSaveSession } from "$utils/hooks/useNavigateWithSaveSession";
 import { motion } from "framer-motion";
 import { styled } from "styled-components";

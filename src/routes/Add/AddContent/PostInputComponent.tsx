@@ -1,8 +1,11 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { AutoCompleteComponent } from "$components/AutoCompleteComponent";
 import ReactQuill from "react-quill";
 import { styled } from "styled-components";
 import { InputComponent } from "$routes/Home/Components/FolderComponents/WindowComponent/Components/InputComponent";
+import { collection, doc, getDoc, getDocs } from "firebase/firestore";
+import { db } from "fbase";
+import { FIRE_STORE_TAGS } from "$utils/constants";
 
 export const PostInputComponent = ({
   title,
@@ -17,14 +20,18 @@ export const PostInputComponent = ({
   tags,
   setTags,
 }: any) => {
-  const [tag, setTag] = useState("");
-  const registerTag = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    if (!tags.includes(tag) && tag) {
-      setTags((prev: string[]) => [...prev, tag]);
+  const [subTagOptions, setSubTagOptions] = useState<string[]>([]);
+  const getMainTagList = async () => {
+    const selected = mainTagOptions[maintag[0]];
+    if (selected) {
+      setSubTagOptions(Object.keys(selected));
     }
-    setTag("");
   };
+  useEffect(() => {
+    if (maintag.length > 0) {
+      getMainTagList();
+    }
+  }, [maintag]);
   return (
     <Content>
       <TitleInputBox>
@@ -46,40 +53,48 @@ export const PostInputComponent = ({
           </MainTag>
         )}
       </TitleInputBox>
-      {maintag.length < 1 ? (
-        <AutoCompleteComponent
-          id="mainTags"
-          value={maintag}
-          label="메인 태그"
-          onChange={(data: string[]) => setMainTag(data)}
-          onChangeOptions={setMainTagOptions}
-          options={mainTagOptions}
-          width="100%"
-        />
-      ) : (
-        <TagBox>
-          <TagForm onSubmit={registerTag}>
-            <InputComponent
-              name="id"
-              placeholder="Enter를 누르면 태그가 등록됩니다."
-              noLabel
-              text={tag}
-              setText={setTag}
-              width="100%"
-            />
-          </TagForm>
-          {tags.map((t: string) => (
-            <Tag
-              onClick={() =>
-                setTags((prev: string[]) => prev.filter((item) => item !== t))
+
+      <TagBox>
+        {maintag.length < 1 ? (
+          <AutoCompleteComponent
+            id="mainTags"
+            value={maintag}
+            label="메인 태그"
+            onChange={(data: string[]) => setMainTag(data)}
+            addNewOption={(item) =>
+              setMainTagOptions((prev: any) => ({ ...prev, [item]: {} }))
+            }
+            options={Object.keys(mainTagOptions)}
+            width="100%"
+          />
+        ) : (
+          <>
+            <AutoCompleteComponent
+              id="subTags"
+              value={tags}
+              label="서브 태그"
+              onChange={(data: string[]) => setTags(data)}
+              addNewOption={(item) =>
+                setSubTagOptions((prev: any) => [...prev, item])
               }
-              key={t}
-            >
-              {t}
-            </Tag>
-          ))}
-        </TagBox>
-      )}
+              options={subTagOptions}
+              width="200px"
+              isMulti
+            />
+            {tags.map((t: string) => (
+              <Tag
+                onClick={() =>
+                  setTags((prev: string[]) => prev.filter((item) => item !== t))
+                }
+                key={t}
+              >
+                {t}
+              </Tag>
+            ))}
+          </>
+        )}
+      </TagBox>
+
       <ReactQuill modules={modules} onChange={setValue} ref={quillRef} />
     </Content>
   );
@@ -102,9 +117,9 @@ const TitleInputBox = styled.div`
 `;
 const TitleInput = styled.input`
   width: 100%;
-  height: 40px;
+  height: 50px;
   padding: 10px;
-  padding-right: 50px;
+  padding-right: 150px;
   box-sizing: border-box;
   outline: none;
   border: none;
@@ -115,13 +130,13 @@ const TitleInput = styled.input`
 `;
 const MainTag = styled.div`
   position: absolute;
-  padding: 10px 5px;
+  padding: 10px 15px;
   right: 5px;
   background-color: ${(props) => props.theme.green};
   color: ${(props) => props.theme.lightGray};
   border-radius: 20px;
-  font-family: "Retro";
-  font-size: 9px;
+  font-size: 14px;
+  font-weight: bold;
   cursor: pointer;
 `;
 const TagBox = styled.div`
@@ -129,7 +144,7 @@ const TagBox = styled.div`
   display: flex;
   align-items: center;
   flex-wrap: wrap;
-  gap: 5px;
+  gap: 10px;
   padding: 0 5px;
   padding-bottom: 10px;
   border-left: 1px solid ${(props) => props.theme.gray};
@@ -142,10 +157,4 @@ const Tag = styled.div`
   border-radius: 15px;
   font-size: 12px;
   cursor: pointer;
-`;
-const TagForm = styled.form`
-  height: 35px;
-  width: 100%;
-  display: flex;
-  align-items: center;
 `;

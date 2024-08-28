@@ -7,6 +7,7 @@ import { alertMsgState } from "$utils/atom";
 import { useSetRecoilState } from "recoil";
 import { AddContent } from "./AddContent";
 import { collection, getDocs } from "firebase/firestore";
+import { FIRE_STORE_TAGS } from "$utils/constants";
 
 interface AddProps {
   isLoggedIn: boolean;
@@ -21,17 +22,19 @@ const Add = ({ isLoggedIn }: AddProps) => {
   }, []);
   const setAlertMsg = useSetRecoilState(alertMsgState);
   const quillRef = useRef<ReactQuill>(null);
-  const [mainTagOptions, setMainTagOptions] = useState<string[]>([]);
+  const [mainTagOptions, setMainTagOptions] = useState<any>({});
   const [images, setImages] = useState<any[]>([]);
-  const getDatas = async () => {
-    const querySnapshot = await getDocs(collection(db, "post"));
-    const opList: string[] = [];
-    querySnapshot.forEach((doc) => opList.push(doc.id));
+  const getMainTagList = async () => {
+    const querySnapshot = await getDocs(collection(db, FIRE_STORE_TAGS));
+    const opList: any = {};
+    querySnapshot.forEach((doc) => {
+      opList[doc.id] = doc.data();
+    });
     setMainTagOptions(opList);
   };
   useEffect(() => {
-    if (mainTagOptions.length === 0) {
-      getDatas();
+    if (Object.keys(mainTagOptions).length === 0) {
+      getMainTagList();
     }
   }, []);
   const handleImageUpload = useCallback(

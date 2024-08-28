@@ -11,7 +11,7 @@ import {
   WindowTitleExtends,
 } from "../styles";
 import { TDragState, TFolder, TFolderList } from "$utils/types";
-import { TASK_BAR_HEIGHT } from "$utils/constans";
+import { TASK_BAR_HEIGHT } from "$utils/constants";
 import { TASK_STATE } from "$routes/Home/constants";
 import { ButtonComponent } from "$components/ButtonComponent";
 

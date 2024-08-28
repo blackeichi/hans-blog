@@ -59,7 +59,6 @@ export const Box = styled.div<{
   align-items: center;
   font-size: 12px;
   border: 1px solid ${(props) => props.theme.gray};
-  border-bottom: none;
 `;
 export const Inputbox = styled.input`
   width: 100%;

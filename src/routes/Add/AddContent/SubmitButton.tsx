@@ -1,5 +1,6 @@
 import { ButtonComponent } from "$components/ButtonComponent";
 import { alertMsgState } from "$utils/atom";
+import { FIRE_STORE_POSTS, FIRE_STORE_TAGS } from "$utils/constants";
 import { db } from "fbase";
 import { doc, setDoc } from "firebase/firestore";
 import { deleteObject } from "firebase/storage";
@@ -21,14 +22,27 @@ export const SubmitButton = ({
     } else if (!maintag[0]) {
       setAlertMsg("메인 태그 입력은 필수입니다.");
     } else {
-      await setDoc(doc(db, "posts", maintag[0]), {
-        title,
-        value,
-        tags,
+      await setDoc(doc(db, FIRE_STORE_POSTS, maintag[0]), {
+        [title]: {
+          value,
+          tags,
+        },
       });
-      await setDoc(doc(db, "tags", maintag[0]), {
-        tags,
-      });
+      if (tags.length > 0) {
+        for (const tag of tags) {
+          await setDoc(
+            doc(db, FIRE_STORE_TAGS, maintag[0]),
+            {
+              [tag]: {
+                title,
+              },
+            },
+            { merge: true }
+          );
+        }
+      } else {
+        await setDoc(doc(db, FIRE_STORE_TAGS, maintag[0]), {}, { merge: true });
+      }
       navigate("/");
     }
   };

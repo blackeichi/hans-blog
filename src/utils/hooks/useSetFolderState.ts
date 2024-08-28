@@ -4,7 +4,7 @@ import {
   TASK_STATE,
 } from "$routes/Home/constants";
 import { folderState, selectedState, sizeState } from "$utils/atom";
-import { TASK_BAR_HEIGHT } from "$utils/constans";
+import { TASK_BAR_HEIGHT } from "$utils/constants";
 import { TFolderList } from "$utils/types";
 import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 

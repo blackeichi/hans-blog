@@ -30,9 +30,7 @@ export const ClickSelect = memo(
       setFilteredOptions(filtered);
     };
     useEffect(() => {
-      if (text) {
-        handleSearchCompany();
-      }
+      handleSearchCompany();
     }, [text]);
     useDidMountEffect(() => {
       if (!isOverlay) {
@@ -58,9 +56,7 @@ export const ClickSelect = memo(
         fontSize={fontSize}
         height={height}
         onClick={(event) => {
-          if (!disabled) {
-            event.stopPropagation();
-          }
+          event.stopPropagation();
         }}
       >
         <Inputbox

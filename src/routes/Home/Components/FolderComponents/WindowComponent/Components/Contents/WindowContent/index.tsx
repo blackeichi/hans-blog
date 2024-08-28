@@ -1,19 +1,22 @@
 import styled from "styled-components";
 import { WindowTopContent } from "./WindowTopContent";
 import { WindowContentBox } from "../../../styles";
+import { TASK_LIST } from "$routes/Home/constants";
+import { DocumentWindow } from "./DocumentWindow";
+import { memo } from "react";
 
-export const WindowContent = () => {
+export const WindowContent = memo(({ type }: { type: string }) => {
   return (
     <>
       <WindowTopContent />
       <WindowContentBox>
         <Content>
-          <TempBox />
+          {type === TASK_LIST.Documents ? <DocumentWindow /> : <TempBox />}
         </Content>
       </WindowContentBox>
     </>
   );
-};
+});
 const Content = styled.div`
   width: 100%;
   height: 100%;
@@ -22,6 +25,7 @@ const Content = styled.div`
   border-left: 1px solid ${(props) => props.theme.darkGray};
   outline: 4px solid ${(props) => props.theme.shadow};
   overflow-x: scroll;
+  padding: 10px;
 `;
 const TempBox = styled.div`
   width: 100%;

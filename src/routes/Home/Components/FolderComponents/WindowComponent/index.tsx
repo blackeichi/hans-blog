@@ -29,7 +29,6 @@ export const WindowComponent = ({ item, index }: WindowProps) => {
   const isProfile = item.title === TASK_LIST.Profile;
   return (
     <WindowOverlay
-      isProfile={isProfile}
       windowState={windowState}
       setWindowState={setWindowState}
       onChangeFolderState={onChangeFolderState}
@@ -44,7 +43,11 @@ export const WindowComponent = ({ item, index }: WindowProps) => {
         onChangeFolderState={onChangeFolderState}
         index={index}
       />
-      {isProfile ? <ProfileContent /> : <WindowContent />}
+      {isProfile ? (
+        <ProfileContent />
+      ) : (
+        <WindowContent type={TASK_LIST[item.title]} />
+      )}
     </WindowOverlay>
   );
 };

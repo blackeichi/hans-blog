@@ -3,7 +3,7 @@ import { TaskIconComponent } from "./TaskIconComponent";
 import { TaskbarBlankBox, TaskbarSeparator } from "./components";
 import { FlexBox } from "styles";
 import { TaskClockComponent } from "./TaskClockComponent";
-import { TASK_BAR_HEIGHT } from "$utils/constans";
+import { TASK_BAR_HEIGHT } from "$utils/constants";
 import { TasksComponent } from "./TasksComponent";
 
 export const Taskbar = () => {

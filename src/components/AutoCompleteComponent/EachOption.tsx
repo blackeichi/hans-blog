@@ -6,13 +6,11 @@ export const EachOption = ({
   item,
   handleClickOption,
 }: any) => {
-  const selected = isMulti
-    ? value.map((val: string) => val).includes(item)
-    : value === item;
+  const selected = value === item;
   return (
     <EachOptionBox
       onClick={(event) => {
-        handleClickOption(event, selected, item);
+        handleClickOption(event, item);
       }}
       selected={isMulti ? false : selected}
     >

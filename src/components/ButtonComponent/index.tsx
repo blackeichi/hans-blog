@@ -1,4 +1,4 @@
-import { GLOBAL_COLOR } from "$utils/constans";
+import { GLOBAL_COLOR } from "$utils/constants";
 import { motion } from "framer-motion";
 import React from "react";
 import { styled } from "styled-components";

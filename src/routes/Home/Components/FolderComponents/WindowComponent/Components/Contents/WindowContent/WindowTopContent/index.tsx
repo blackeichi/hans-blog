@@ -8,7 +8,6 @@ import { useRecoilValue } from "recoil";
 import styled from "styled-components";
 import { FlexBox } from "styles";
 import { MenuComponent } from "./MenuComponent";
-import { GLOBAL_COLOR } from "$utils/constans";
 
 export const WindowTopContent = () => {
   const isLoggedIn = useRecoilValue<boolean>(isLoggedInState);

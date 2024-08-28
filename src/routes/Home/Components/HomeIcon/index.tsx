@@ -10,6 +10,7 @@ import {
   TSelectedState,
   TSizeState,
 } from "$utils/types";
+import { IconComponent } from "$components/IconComponent";
 
 interface HomeIconProps {
   item: {
@@ -77,13 +78,13 @@ export const HomeIcon = memo(
           id={item.title}
         >
           <IconComponent
-            onMouseDown={onClick}
+            onClick={onClick}
             onContextMenu={onContextMenu}
             onDoubleClick={onDoubleClick}
-          >
-            <Icon isSelected={isSelected} src={item.icon} />
-            <IconName isSelected={isSelected}>{item.title}</IconName>
-          </IconComponent>
+            isSelected={isSelected}
+            icon={item.icon}
+            title={item.title}
+          />
         </ContextComponent>
       </HomeIconBox>
     );
@@ -96,33 +97,4 @@ const HomeIconBox = styled.div<{ x: number; y: number }>`
   z-index: 1;
   width: fit-content;
   height: fit-content;
-`;
-const IconComponent = styled.div`
-  display: flex;
-  flex-direction: column;
-  width: 80px;
-  align-items: center;
-  justify-content: space-between;
-  height: 55px;
-`;
-const Icon = styled.div<{ isSelected: boolean; src: string }>`
-  background-image: ${(props) =>
-    props.isSelected
-      ? `linear-gradient(to bottom, rgba(1, 1, 122,0.4), rgba(1, 1, 122,0.4)), url(${props.src})`
-      : `url(${props.src})`};
-  background-size: contain;
-  background-position: center;
-  height: 35px;
-  width: 40px;
-`;
-const IconName = styled.div<{ isSelected: boolean }>`
-  color: white;
-  background-color: ${(props) =>
-    props.isSelected ? "rgba(1, 1, 122, 0.4)" : "transparent"};
-  border: ${(props) => (props.isSelected ? "2px dotted darkgray" : `none`)};
-  height: 15px;
-  font-size: 11px;
-  display: flex;
-  align-items: center;
-  padding: 2px;
 `;

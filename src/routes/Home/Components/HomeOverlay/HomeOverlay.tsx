@@ -7,7 +7,7 @@ import {
   TSelectedState,
   TSizeState,
 } from "$utils/types";
-import { TASK_BAR_HEIGHT } from "$utils/constans";
+import { TASK_BAR_HEIGHT } from "$utils/constants";
 import { mouseLocaleState } from "$utils/atom";
 import { useSetRecoilState } from "recoil";
 

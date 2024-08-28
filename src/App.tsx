@@ -1,6 +1,6 @@
 import { useState, lazy, Suspense, useEffect } from "react";
 import { createGlobalStyle, styled, ThemeProvider } from "styled-components";
-import { GLOBAL_COLOR } from "./utils/constans";
+import { GLOBAL_COLOR } from "./utils/constants";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { Helmet } from "react-helmet";
 import { Layout } from "$components/Layout";

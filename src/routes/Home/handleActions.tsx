@@ -3,7 +3,7 @@ import { actionState, selectedState } from "$utils/atom";
 import { useRecoilState } from "recoil";
 import { useSetFolderState } from "$utils/hooks/useSetFolderState";
 import { ACTION_TYPES, TASK_LIST } from "./constants";
-import { KEY_EVENTS } from "$utils/constans";
+import { KEY_EVENTS } from "$utils/constants";
 
 export const HandleActions = () => {
   const [action, setAction] = useRecoilState(actionState);
