@@ -1,5 +1,5 @@
-import { styled } from "styled-components";
 import { lazy, Suspense } from "react";
+import { ProfileBodyWrapper } from "../styles";
 
 const CommonComponent = lazy(() => import("./Common"));
 const SystemComponent = lazy(() => import("./System"));
@@ -13,11 +13,3 @@ export const ProfileBody = ({ selectedMenu }: { selectedMenu: number }) => {
     </ProfileBodyWrapper>
   );
 };
-
-const ProfileBodyWrapper = styled.div`
-  width: 100%;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-`;

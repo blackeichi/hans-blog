@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { ACTION_TYPES, TASK_ICONS } from "$routes/Home/constants";
-import { styled } from "styled-components";
 import {
   TActionState,
   TDragState,
@@ -10,6 +9,7 @@ import {
 import { TASK_BAR_HEIGHT } from "$utils/constants";
 import { mouseLocaleState } from "$utils/atom";
 import { useSetRecoilState } from "recoil";
+import { Drag, HomeContainer } from "$routes/Home/styles";
 
 interface IHomeOverly {
   children: React.ReactNode;
@@ -123,24 +123,3 @@ export const HomeOverly = ({
     </HomeContainer>
   );
 };
-
-const HomeContainer = styled.div<{ taskbarHeight: number }>`
-  width: 100%;
-  height: ${(props) => `calc(100% - ${props.taskbarHeight}px)`};
-  outline: none;
-  position: relative;
-  box-sizing: border-box;
-`;
-const Drag = styled.div<{
-  width: number;
-  height: number;
-  x: number;
-  y: number;
-}>`
-  position: absolute;
-  width: ${(props) => `${props.width}px`};
-  height: ${(props) => `${props.height}px`};
-  left: ${(props) => `${props.x}px`};
-  top: ${(props) => `${props.y}px`};
-  border: 1px dashed ${(props) => props.theme.gray};
-`;

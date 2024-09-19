@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { FlexBox } from "styles";
 import {
   CloseIcon,
@@ -10,20 +10,11 @@ import {
   WindowTitleBox,
   WindowTitleExtends,
 } from "../styles";
-import { TDragState, TFolder, TFolderList } from "$utils/types";
-import { TASK_BAR_HEIGHT } from "$utils/constants";
 import { TASK_STATE } from "$routes/Home/constants";
 import { ButtonComponent } from "$components/ButtonComponent";
-
-interface IWindowTitle {
-  isProfile: boolean;
-  windowState: TFolder;
-  item: TFolder;
-  setWindowState: React.Dispatch<React.SetStateAction<TFolder>>;
-  setFolderState: React.Dispatch<React.SetStateAction<TFolderList>>;
-  onChangeFolderState: (value?: TFolder) => void;
-  index: number;
-}
+import { IWindowTitle } from "$routes/Home/types";
+import { useSetFolderSetting } from "$routes/Home/actions";
+import { SetStateType, TFolderList } from "$utils/types";
 
 export const WindowTitle = ({
   isProfile,
@@ -33,50 +24,17 @@ export const WindowTitle = ({
   setFolderState,
   onChangeFolderState,
   index,
-}: IWindowTitle) => {
-  const [dragStart, setDragStart] = useState(false);
-  const [dragState, setDragState] = useState<TDragState>(null);
-  const onMoveStart = (event: React.MouseEvent) => {
-    setDragStart(true);
-    setDragState({
-      startX: event.clientX - windowState.x,
-      startY: event.clientY - windowState.y,
+}: IWindowTitle & {
+  setFolderState: SetStateType<TFolderList>;
+  index: number;
+}) => {
+  const { onMaximization, onMoveStart, dragStart, onMove, onMoveEnd } =
+    useSetFolderSetting({
+      windowState,
+      setWindowState,
+      item,
+      onChangeFolderState,
     });
-  };
-  const onMove = (event: any) => {
-    const changedX = event.clientX - (dragState?.startX || 0);
-    const changedY = event.clientY - (dragState?.startY || 0);
-    const screenHeight = event.view.innerHeight - TASK_BAR_HEIGHT;
-    setWindowState((prev) => ({
-      ...prev,
-      y:
-        changedY < 0
-          ? 0
-          : changedY + windowState.height > screenHeight
-          ? screenHeight - windowState.height
-          : changedY,
-      x:
-        changedX < 0
-          ? 0
-          : changedX + windowState.width > event.view.innerWidth
-          ? event.view.innerWidth - windowState.width
-          : changedX,
-    }));
-  };
-  const onMoveEnd = () => {
-    setDragStart(false);
-    setDragState(null);
-    if (item.x !== windowState.x || item.y !== windowState.y) {
-      onChangeFolderState();
-    }
-  };
-  const onMaximization = () => {
-    const newFolderState = {
-      ...windowState,
-      isMax: windowState.isMax ? false : true,
-    };
-    onChangeFolderState(newFolderState);
-  };
   const WindowBtns = [
     {
       icon: <MinimalizationIcon />,

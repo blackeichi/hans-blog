@@ -115,3 +115,30 @@ export const CloseIcon = styled.div`
   padding-bottom: 2px;
   padding-right: 1px;
 `;
+
+export const InputComponentContainer = styled.div<{ width: string }>`
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  gap: 5px;
+  width: ${(props) => props.width};
+`;
+export const Placeholder = styled.div`
+  font-size: 13px;
+`;
+export const InputBox = styled.div`
+  position: relative;
+  height: 28px;
+  width: 100%;
+`;
+export const Input = styled.input`
+  outline: none;
+  border: none;
+  width: 100%;
+  height: 100%;
+  border-top: 2px solid ${(props) => props.theme.darkGray};
+  border-left: 2px solid ${(props) => props.theme.darkGray};
+  border-bottom: 2px solid ${(props) => props.theme.lightGray};
+  border-right: 2px solid ${(props) => props.theme.lightGray};
+  box-sizing: border-box;
+`;
