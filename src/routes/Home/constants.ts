@@ -7,12 +7,14 @@ export const TASK_LIST: TTASK_LIST = {
   Documents: "Documents",
   Tags: "Tags",
   Search: "Search",
+  Musics: "Musics",
 };
 export const ICONS = {
   [TASK_LIST.Profile]: "/images/myComputer.png",
   [TASK_LIST.Documents]: "/images/postsFolder.png",
   [TASK_LIST.Tags]: "/images/tagsFolder.png",
   [TASK_LIST.Search]: "/images/search.png",
+  [TASK_LIST.Musics]: "/images/music.png",
 };
 export const TASK_ICONS = [
   { title: TASK_LIST.Profile, icon: ICONS[TASK_LIST.Profile], x: 20, y: 15 },
@@ -24,6 +26,7 @@ export const TASK_ICONS = [
   },
   { title: TASK_LIST.Tags, icon: ICONS[TASK_LIST.Tags], x: 20, y: 185 },
   { title: TASK_LIST.Search, icon: ICONS[TASK_LIST.Search], x: 20, y: 270 },
+  { title: TASK_LIST.Musics, icon: ICONS[TASK_LIST.Musics], x: 20, y: 355 },
 ];
 
 export const TASK_STATE = {
