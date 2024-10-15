@@ -1,23 +1,10 @@
-import { db } from "fbase";
-import { collection, getDocs } from "firebase/firestore";
-import { FIRE_STORE_POSTS, GLOBAL_COLOR } from "$utils/constants";
-import { useEffect, useState } from "react";
+import { GLOBAL_COLOR } from "$utils/constants";
 import { styled } from "styled-components";
 import { IconComponent } from "$components/IconComponent";
+import { useGetPosts } from "$routes/Home/actions";
 
 export const DocumentWindow = () => {
-  const [posts, setPosts] = useState<any>({});
-  const getData = async () => {
-    const querySnapshot = await getDocs(collection(db, FIRE_STORE_POSTS));
-    let data: any = {};
-    querySnapshot.forEach((doc) => {
-      data = { ...data, ...doc.data() };
-    });
-    setPosts(data);
-  };
-  useEffect(() => {
-    getData();
-  }, []);
+  const posts = useGetPosts();
   return (
     <>
       {Object.keys(posts).length > 0 &&

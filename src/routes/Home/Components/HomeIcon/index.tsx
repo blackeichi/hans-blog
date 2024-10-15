@@ -11,6 +11,7 @@ import {
   TSizeState,
 } from "$utils/types";
 import { IconComponent } from "$components/IconComponent";
+import { HomeIconBox } from "$routes/Home/styles";
 
 interface HomeIconProps {
   item: {
@@ -90,11 +91,3 @@ export const HomeIcon = memo(
     );
   }
 );
-const HomeIconBox = styled.div<{ x: number; y: number }>`
-  position: absolute;
-  left: ${(props) => `${props.x}px`};
-  top: ${(props) => `${props.y}px`};
-  z-index: 1;
-  width: fit-content;
-  height: fit-content;
-`;

@@ -1,4 +1,9 @@
-import { styled } from "styled-components";
+import {
+  Input,
+  InputBox,
+  InputComponentContainer,
+  Placeholder,
+} from "../../styles";
 
 interface InputComponentProps {
   placeholder: string;
@@ -34,30 +39,3 @@ export const InputComponent = ({
     </InputComponentContainer>
   );
 };
-
-const InputComponentContainer = styled.div<{ width: string }>`
-  display: flex;
-  flex-direction: column;
-  box-sizing: border-box;
-  gap: 5px;
-  width: ${(props) => props.width};
-`;
-const Placeholder = styled.div`
-  font-size: 13px;
-`;
-const InputBox = styled.div`
-  position: relative;
-  height: 28px;
-  width: 100%;
-`;
-const Input = styled.input`
-  outline: none;
-  border: none;
-  width: 100%;
-  height: 100%;
-  border-top: 2px solid ${(props) => props.theme.darkGray};
-  border-left: 2px solid ${(props) => props.theme.darkGray};
-  border-bottom: 2px solid ${(props) => props.theme.lightGray};
-  border-right: 2px solid ${(props) => props.theme.lightGray};
-  box-sizing: border-box;
-`;

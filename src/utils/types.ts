@@ -1,3 +1,5 @@
+import { Dispatch, SetStateAction } from "react";
+
 export type TSelectedState = null | string[];
 
 export type TMouseLocaleState = null | { x: number; y: number };
@@ -29,3 +31,5 @@ export type TDragState = {
   startY: number;
   endY?: number | undefined;
 } | null;
+
+export type SetStateType<T> = Dispatch<SetStateAction<T>>;

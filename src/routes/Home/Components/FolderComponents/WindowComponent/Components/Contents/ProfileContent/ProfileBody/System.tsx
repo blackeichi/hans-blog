@@ -1,6 +1,4 @@
 import { useState } from "react";
-import { styled } from "styled-components";
-import { FlexBox } from "styles";
 import { useRecoilValue, useSetRecoilState } from "recoil";
 import { alertMsgState, isLoggedInState } from "$utils/atom";
 import { ButtonComponent } from "$components/ButtonComponent";
@@ -8,6 +6,7 @@ import { signInWithEmailAndPassword, signOut } from "firebase/auth";
 import { auth } from "fbase";
 import { InputComponent } from "../../../InputComponent";
 import { returnVerify } from "$routes/Home/utils";
+import { ColBox, Img, SubTitle, SystemWrapper, Title } from "../styles";
 
 const System = () => {
   const setAlertMsg = useSetRecoilState(alertMsgState);
@@ -99,34 +98,3 @@ const System = () => {
   );
 };
 export default System;
-const SystemWrapper = styled.div`
-  display: flex;
-  gap: 50px;
-  width: 100%;
-  height: 100%;
-  padding: 15px 0;
-`;
-const Img = styled.div<{ src: string }>`
-  width: 220px;
-  height: 100%;
-  background-image: ${(props) => `url(${props.src})`};
-  background-size: contain;
-  background-position: center;
-  flex-shrink: 0;
-`;
-const ColBox = styled(FlexBox)`
-  flex-direction: column;
-  gap: 20px;
-  align-items: flex-start;
-  justify-content: center;
-  padding-top: 15px;
-  padding-right: 30px;
-  font-size: 14px;
-`;
-const Title = styled.div`
-  font-family: "Retro";
-  font-size: 16px;
-`;
-const SubTitle = styled.div`
-  font-size: 13px;
-`;
