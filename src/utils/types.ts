@@ -33,3 +33,10 @@ export type TDragState = {
 } | null;
 
 export type SetStateType<T> = Dispatch<SetStateAction<T>>;
+export interface FetchState {
+  loading: boolean;
+  statusCode: number;
+  data: any;
+}
+export type MutateFunctionType = <F>(body: F) => void;
+export type MutationReturnType = [MutateFunctionType, FetchState];

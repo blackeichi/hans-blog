@@ -9,9 +9,18 @@ import { auth } from "fbase";
 import { AlertComponent } from "$components/AlertComponent";
 import { useRecoilState } from "recoil";
 import { isLoggedInState } from "$utils/atom";
+import { QueryClient, QueryClientProvider } from "react-query";
 
 const HomePage = lazy(() => import("$routes/Home"));
 const AddPage = lazy(() => import("$routes/Add"));
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      refetchOnWindowFocus: false, // window focus 설정
+      retry: 1,
+    },
+  },
+});
 
 function App() {
   const [init, setInit] = useState<boolean>(false);
@@ -43,16 +52,18 @@ function App() {
             }
           >
             {init && (
-              <Routes>
-                <Route
-                  path="/"
-                  element={<HomePage isLoggedIn={isLoggedIn} />}
-                />
-                <Route
-                  path="/add"
-                  element={<AddPage isLoggedIn={isLoggedIn} />}
-                />
-              </Routes>
+              <QueryClientProvider client={queryClient}>
+                <Routes>
+                  <Route
+                    path="/"
+                    element={<HomePage isLoggedIn={isLoggedIn} />}
+                  />
+                  <Route
+                    path="/add"
+                    element={<AddPage isLoggedIn={isLoggedIn} />}
+                  />
+                </Routes>
+              </QueryClientProvider>
             )}
           </Suspense>
         </Layout>

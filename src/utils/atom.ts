@@ -50,3 +50,12 @@ export const isLoggedInState = atom<boolean>({
   key: "isLoggedInState",
   default: false,
 });
+
+export const loadingState = atom<number>({
+  key: "loadingState",
+  default: 0,
+});
+export const errorState = atom<string | React.ReactNode>({
+  key: "errorState",
+  default: null,
+});

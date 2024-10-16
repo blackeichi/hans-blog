@@ -24,3 +24,5 @@ export const FOLDER_MIN_HEIGHT = 150;
 
 export const FIRE_STORE_POSTS = "posts";
 export const FIRE_STORE_TAGS = "tags";
+
+export const URL_DOMAIN = "https://www.googleapis.com/youtube/v3/";
