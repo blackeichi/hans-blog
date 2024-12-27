@@ -8,7 +8,7 @@ import {
   ProfileMenuBox,
 } from "./styles";
 
-export const ProfileContent = () => {
+const ProfileContent = () => {
   const [selectedMenu, setSelectedMenu] = useState<1 | 2>(1);
   return (
     <ProfileContentBox>
@@ -32,3 +32,5 @@ export const ProfileContent = () => {
     </ProfileContentBox>
   );
 };
+
+export default ProfileContent;

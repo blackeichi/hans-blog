@@ -1,12 +1,15 @@
-import { useState, useEffect } from "react";
+import { Suspense, lazy, useState, useEffect } from "react";
 import { WindowOverlay } from "./Components/WindowOverlay";
 import { TFolder } from "$utils/types";
 import { folderState } from "$utils/atom";
 import { useSetRecoilState } from "recoil";
 import { TASK_LIST, TASK_STATE } from "$routes/Home/constants";
-import { ProfileContent } from "./Components/Contents/ProfileContent";
 import { WindowTitle } from "./Components/WindowTitle";
-import { WindowContent } from "./Components/Contents/WindowContent";
+
+const ProfileContent = lazy(
+  () => import("./Components/Contents/ProfileContent")
+);
+const WindowContent = lazy(() => import("./Components/Contents/WindowContent"));
 
 interface WindowProps {
   item: TFolder;
@@ -43,11 +46,13 @@ export const WindowComponent = ({ item, index }: WindowProps) => {
         onChangeFolderState={onChangeFolderState}
         index={index}
       />
-      {isProfile ? (
-        <ProfileContent />
-      ) : (
-        <WindowContent type={TASK_LIST[item.title]} />
-      )}
+      <Suspense fallback={<></>}>
+        {isProfile ? (
+          <ProfileContent />
+        ) : (
+          <WindowContent type={TASK_LIST[item.title]} />
+        )}
+      </Suspense>
     </WindowOverlay>
   );
 };

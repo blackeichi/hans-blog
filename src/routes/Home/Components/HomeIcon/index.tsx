@@ -1,5 +1,4 @@
 import { useState, memo } from "react";
-import { styled } from "styled-components";
 import { HandleOpenState } from "$components/Common/handleOpenState";
 import { IconContextMenu } from "./IconContextMenu";
 import { ACTION_TYPES } from "$routes/Home/constants";

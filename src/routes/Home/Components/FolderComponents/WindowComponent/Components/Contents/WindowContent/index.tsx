@@ -6,7 +6,7 @@ import { DocumentWindow } from "./DocumentWindow";
 import { memo } from "react";
 import { MusicWindow } from "./MusicWindow";
 
-export const WindowContent = memo(({ type }: { type: string }) => {
+const WindowContent = memo(({ type }: { type: string }) => {
   return (
     <>
       <WindowTopContent />
@@ -38,3 +38,4 @@ const TempBox = styled.div`
   width: 100%;
   height: 1000px;
 `;
+export default WindowContent;

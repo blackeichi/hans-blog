@@ -1,5 +1,5 @@
 import { useState, lazy, Suspense, useEffect } from "react";
-import { createGlobalStyle, styled, ThemeProvider } from "styled-components";
+import { styled, ThemeProvider } from "styled-components";
 import { GLOBAL_COLOR } from "./utils/constants";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { Helmet } from "react-helmet";
@@ -10,6 +10,7 @@ import { AlertComponent } from "$components/AlertComponent";
 import { useRecoilState } from "recoil";
 import { isLoggedInState } from "$utils/atom";
 import { QueryClient, QueryClientProvider } from "react-query";
+import { GlobalStyles } from "styles";
 
 const HomePage = lazy(() => import("$routes/Home"));
 const AddPage = lazy(() => import("$routes/Add"));
@@ -80,60 +81,4 @@ const Loader = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-`;
-const GlobalStyles = createGlobalStyle`
-  html, body, div, span, applet, object, iframe,
-h1, h2, h3, h4, h5, h6, p, blockquote, pre,
-a, abbr, acronym, address, big, cite, code,
-del, dfn, img, ins, kbd, q, samp,
-small, strike, sub, sup, tt, var,
-b, u, i, center,
-dl, dt, dd, ol, ul, li,
-fieldset, form, label, legend,
-table, caption, tbody, tfoot, thead, tr, th, td,
-article, aside, canvas, details, embed, 
-figure, figcaption, footer, header, hgroup, 
-menu, nav, output, ruby, section, summary,
-time, mark, audio, video {
-	margin: 0;
-	padding: 0;
-	border: 0;
-	font-size: 100%;
-	font: inherit;
-	vertical-align: baseline;
-  box-sizing: border-box;
-  -webkit-user-select:none;
-  -moz-user-select:none;
-  -ms-user-select:none;
-  user-select:none
-}
-/* HTML5 display-role reset for older browsers */
-article, aside, details, figcaption, figure, 
-footer, header, hgroup, menu, nav, section {
-	display: block;
-}
-body {
-	line-height: 1;
-}
-ol, ul {
-	list-style: none;
-}
-blockquote, q {
-	quotes: none;
-}
-blockquote:before, blockquote:after,
-q:before, q:after {
-	content: '';
-	content: none;
-}
-table {
-	border-collapse: collapse;
-	border-spacing: 0;
-}
-div {
-  background-repeat : no-repeat;
-}
-button{
-  background: inherit ; border:none; box-shadow:none; border-radius:0; padding:0; overflow:visible;
-}
 `;
