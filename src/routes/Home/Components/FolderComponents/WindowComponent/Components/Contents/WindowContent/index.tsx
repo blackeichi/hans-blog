@@ -4,7 +4,6 @@ import { WindowContentBox } from "../../../styles";
 import { TASK_LIST } from "$routes/Home/constants";
 import { DocumentWindow } from "./DocumentWindow";
 import { memo } from "react";
-import { MusicWindow } from "./MusicWindow";
 
 const WindowContent = memo(({ type }: { type: string }) => {
   return (
@@ -12,13 +11,7 @@ const WindowContent = memo(({ type }: { type: string }) => {
       <WindowTopContent />
       <WindowContentBox>
         <Content>
-          {type === TASK_LIST.Documents ? (
-            <DocumentWindow />
-          ) : type === TASK_LIST.Musics ? (
-            <MusicWindow />
-          ) : (
-            <TempBox />
-          )}
+          {type === TASK_LIST.Documents ? <DocumentWindow /> : <TempBox />}
         </Content>
       </WindowContentBox>
     </>
