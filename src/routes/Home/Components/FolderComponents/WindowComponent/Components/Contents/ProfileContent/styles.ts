@@ -1,8 +1,11 @@
 import { styled } from "styled-components";
-import { WindowContentBox } from "../../../styles";
 import { FlexBox } from "styles";
 
-export const ProfileContentBox = styled(WindowContentBox)`
+export const ProfileContentBox = styled.div`
+  width: 100%;
+  height: calc(100% - 65px);
+  padding: 15px;
+  padding-top: 0px;
   display: flex;
   flex-direction: column;
   text-shadow: 1px 1px gray;

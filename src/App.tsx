@@ -12,7 +12,6 @@ import { GlobalStyles } from "styles";
 import "./App.css";
 
 const HomePage = lazy(() => import("$routes/Home"));
-const AddPage = lazy(() => import("$routes/Add"));
 
 function App() {
   const [init, setInit] = useState<boolean>(false);
@@ -42,10 +41,6 @@ function App() {
                 <Route
                   path="/"
                   element={<HomePage isLoggedIn={isLoggedIn} />}
-                />
-                <Route
-                  path="/add"
-                  element={<AddPage isLoggedIn={isLoggedIn} />}
                 />
               </Routes>
             )}
