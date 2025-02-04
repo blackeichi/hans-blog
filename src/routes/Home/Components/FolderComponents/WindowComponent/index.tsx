@@ -1,4 +1,4 @@
-import { Suspense, useCallback, lazy, useState, useEffect } from "react";
+import { Suspense, useCallback, lazy, useState, useEffect, memo } from "react";
 import { WindowOverlay } from "./Components/WindowOverlay";
 import { TFolder } from "$utils/types";
 import { folderState } from "$utils/atom";
@@ -19,7 +19,7 @@ interface WindowProps {
   index: number;
 }
 
-export const WindowComponent = ({ item, index }: WindowProps) => {
+export const WindowComponent = memo(({ item, index }: WindowProps) => {
   const [windowState, setWindowState] = useState<TFolder>(item);
   useEffect(() => {
     setWindowState(item);
@@ -61,4 +61,4 @@ export const WindowComponent = ({ item, index }: WindowProps) => {
       </Suspense>
     </WindowOverlay>
   );
-};
+});
