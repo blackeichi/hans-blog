@@ -4,14 +4,25 @@ export const IconComponent = ({
   onClick,
   onContextMenu,
   onDoubleClick,
-  isSelected,
+  isSelected = false,
   icon,
   title,
   width = "35px",
   height = "40px",
   color = "white",
   size = "11px",
-}: any) => {
+}: {
+  onClick?: any;
+  onContextMenu?: any;
+  onDoubleClick?: any;
+  isSelected?: boolean;
+  icon: string;
+  title?: string;
+  width?: string;
+  height?: string;
+  color?: string;
+  size?: string;
+}) => {
   return (
     <IconWrapper
       onMouseDown={onClick}
@@ -19,9 +30,11 @@ export const IconComponent = ({
       onDoubleClick={onDoubleClick}
     >
       <Icon width={width} height={height} isSelected={isSelected} src={icon} />
-      <IconName isSelected={isSelected} color={color} size={size}>
-        {title}
-      </IconName>
+      {title && (
+        <IconName isSelected={isSelected} color={color} size={size}>
+          {title}
+        </IconName>
+      )}
     </IconWrapper>
   );
 };

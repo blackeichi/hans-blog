@@ -29,13 +29,6 @@ export const WindowBox = styled(motion.div)<{
   text-shadow: 1px 1px gray;
 `;
 
-export const WindowContentBox = styled.div`
-  width: 100%;
-  height: calc(100% - 65px);
-  padding: 15px;
-  padding-top: 0px;
-`;
-
 export const ResizeWindowBox = styled.div`
   position: absolute;
   width: 14px;
@@ -62,13 +55,25 @@ export const WindowTitleBox = styled.div`
   position: relative;
   font-size: 14px;
 `;
+
+export const TitleIcon = styled.div<{
+  src: string;
+}>`
+  background-image: ${(props) => `url(${props.src})`};
+  background-size: contain;
+  background-position: center;
+  height: 17px;
+  width: 17px;
+`;
+
 export const Title = styled.div`
-  padding-left: 5px;
+  padding-left: 10px;
   width: 100%;
   height: 100%;
   display: flex;
   align-items: center;
   z-index: 1;
+  gap: 7px;
 `;
 export const WindowTitleExtends = styled.div`
   position: absolute;

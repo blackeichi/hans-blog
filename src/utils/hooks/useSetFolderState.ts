@@ -1,6 +1,7 @@
 import {
   DEFAULT_HEIGHT,
   DEFAULT_WIDTH,
+  ICONS,
   TASK_STATE,
 } from "$routes/Home/constants";
 import { folderState, selectedState, sizeState } from "$utils/atom";
@@ -32,6 +33,7 @@ export const useSetFolderState = () => {
             .map((item, index) => ({
               title: item,
               isMax: false,
+              icon: ICONS[item],
               state: TASK_STATE.OPEN,
               ...(selected.length > 1
                 ? {

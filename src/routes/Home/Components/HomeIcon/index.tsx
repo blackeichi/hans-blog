@@ -1,4 +1,4 @@
-import { useState, memo } from "react";
+import { useState, memo, useCallback } from "react";
 import { HandleOpenState } from "$components/Common/handleOpenState";
 import { IconContextMenu } from "./IconContextMenu";
 import { ACTION_TYPES } from "$routes/Home/constants";
@@ -32,11 +32,11 @@ export const HomeIcon = memo(
     setAction,
     setSize,
   }: HomeIconProps) => {
-    const handleOpenFolder = () => {
+    const handleOpenFolder = useCallback(() => {
       setAction({
         type: ACTION_TYPES.OPEN_FOLDER,
       });
-    };
+    }, []);
     const [isSelected, setIsSelected] = useState<boolean>(false);
     const onClick = (event: any) => {
       setSize({
@@ -52,9 +52,6 @@ export const HomeIcon = memo(
         height: event?.view?.innerHeight || 0,
       });
       setSelected([item.title]);
-    };
-    const onDoubleClick = () => {
-      handleOpenFolder();
     };
     return (
       <HomeIconBox
@@ -80,7 +77,7 @@ export const HomeIcon = memo(
           <IconComponent
             onClick={onClick}
             onContextMenu={onContextMenu}
-            onDoubleClick={onDoubleClick}
+            onDoubleClick={handleOpenFolder}
             isSelected={isSelected}
             icon={item.icon}
             title={item.title}

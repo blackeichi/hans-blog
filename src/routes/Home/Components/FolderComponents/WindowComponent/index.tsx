@@ -1,4 +1,4 @@
-import { Suspense, lazy, useState, useEffect } from "react";
+import { Suspense, useCallback, lazy, useState, useEffect } from "react";
 import { WindowOverlay } from "./Components/WindowOverlay";
 import { TFolder } from "$utils/types";
 import { folderState } from "$utils/atom";
@@ -8,6 +8,9 @@ import { WindowTitle } from "./Components/WindowTitle";
 
 const ProfileContent = lazy(
   () => import("./Components/Contents/ProfileContent")
+);
+const GameMineContent = lazy(
+  () => import("./Components/Contents/GameMineContent")
 );
 const WindowContent = lazy(() => import("./Components/Contents/WindowContent"));
 
@@ -22,14 +25,16 @@ export const WindowComponent = ({ item, index }: WindowProps) => {
     setWindowState(item);
   }, [item]);
   const setFolderState = useSetRecoilState(folderState);
-  const onChangeFolderState = (value?: TFolder) => {
-    setFolderState((prev) => [
-      ...prev.slice(0, index),
-      ...prev.slice(index + 1, prev.length),
-      { ...(value || { ...windowState, state: TASK_STATE.OPEN }) },
-    ]);
-  };
-  const isProfile = item.title === TASK_LIST.Profile;
+  const onChangeFolderState = useCallback(
+    (value?: TFolder) => {
+      setFolderState((prev) => [
+        ...prev.slice(0, index),
+        ...prev.slice(index + 1, prev.length),
+        { ...(value || { ...windowState, state: TASK_STATE.OPEN }) },
+      ]);
+    },
+    [windowState, index]
+  );
   return (
     <WindowOverlay
       windowState={windowState}
@@ -38,7 +43,6 @@ export const WindowComponent = ({ item, index }: WindowProps) => {
       index={index}
     >
       <WindowTitle
-        isProfile={isProfile}
         windowState={windowState}
         item={item}
         setWindowState={setWindowState}
@@ -47,8 +51,10 @@ export const WindowComponent = ({ item, index }: WindowProps) => {
         index={index}
       />
       <Suspense fallback={<></>}>
-        {isProfile ? (
+        {item.title === TASK_LIST.Profile ? (
           <ProfileContent />
+        ) : item.title === TASK_LIST.GameMine ? (
+          <GameMineContent />
         ) : (
           <WindowContent type={TASK_LIST[item.title]} />
         )}

@@ -1,15 +1,13 @@
 import { ButtonComponent } from "$components/ButtonComponent";
 import { TaskbarBlankBox } from "$components/Layout/Taskbar/components";
 import { isLoggedInState } from "$utils/atom";
-import { faCaretLeft, faCaretRight } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useState } from "react";
 import { useRecoilValue } from "recoil";
 import styled from "styled-components";
 import { FlexBox } from "styles";
 import { MenuComponent } from "./MenuComponent";
 
-export const WindowTopContent = () => {
+export const MenuBtnsComponent = () => {
   const isLoggedIn = useRecoilValue<boolean>(isLoggedInState);
   const [open, setOpen] = useState(false);
   return (
@@ -28,10 +26,6 @@ export const WindowTopContent = () => {
           disabled={!isLoggedIn}
         />
         {open && <MenuComponent />}
-      </PageBtnBox>
-      <PageBtnBox>
-        <FontAwesomeIcon fontSize="25px" icon={faCaretLeft} />
-        <FontAwesomeIcon fontSize="25px" icon={faCaretRight} />
       </PageBtnBox>
     </BtnBox>
   );

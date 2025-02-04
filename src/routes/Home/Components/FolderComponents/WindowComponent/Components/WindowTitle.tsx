@@ -5,6 +5,7 @@ import {
   MaximizationIcon,
   MinimalizationIcon,
   Title,
+  TitleIcon,
   UnMaximizationBox,
   UnMaximizationIcom,
   WindowTitleBox,
@@ -15,9 +16,9 @@ import { ButtonComponent } from "$components/ButtonComponent";
 import { IWindowTitle } from "$routes/Home/types";
 import { useSetFolderSetting } from "$routes/Home/actions";
 import { SetStateType, TFolderList } from "$utils/types";
+import { IconComponent } from "$components/IconComponent";
 
 export const WindowTitle = ({
-  isProfile,
   windowState,
   item,
   setWindowState,
@@ -46,28 +47,26 @@ export const WindowTitle = ({
         onChangeFolderState(newFolderState);
       },
     },
-    isProfile
-      ? null
-      : {
-          icon: windowState.isMax ? (
-            <UnMaximizationBox>
-              <UnMaximizationIcom
-                style={{
-                  bottom: 0,
-                  zIndex: 1,
-                }}
-              />
-              <UnMaximizationIcom
-                style={{
-                  right: 1,
-                }}
-              />
-            </UnMaximizationBox>
-          ) : (
-            <MaximizationIcon />
-          ),
-          action: () => onMaximization(),
-        },
+    {
+      icon: windowState.isMax ? (
+        <UnMaximizationBox>
+          <UnMaximizationIcom
+            style={{
+              bottom: 0,
+              zIndex: 1,
+            }}
+          />
+          <UnMaximizationIcom
+            style={{
+              right: 1,
+            }}
+          />
+        </UnMaximizationBox>
+      ) : (
+        <MaximizationIcon />
+      ),
+      action: () => onMaximization(),
+    },
     {
       icon: <CloseIcon>x</CloseIcon>,
       action: () => {
@@ -86,7 +85,8 @@ export const WindowTitle = ({
       onMouseUp={onMoveEnd}
     >
       {dragStart && <WindowTitleExtends />}
-      <Title onDoubleClick={() => (isProfile ? null : onMaximization())}>
+      <Title onDoubleClick={onMaximization}>
+        <TitleIcon src={windowState.icon} />
         {windowState.title}
       </Title>
       <FlexBox
