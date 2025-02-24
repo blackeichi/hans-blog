@@ -29,9 +29,9 @@ export const IconComponent = ({
       onContextMenu={onContextMenu}
       onDoubleClick={onDoubleClick}
     >
-      <Icon width={width} height={height} isSelected={isSelected} src={icon} />
+      <Icon width={width} height={height} $isSelected={isSelected} src={icon} />
       {title && (
-        <IconName isSelected={isSelected} color={color} size={size}>
+        <IconName $isSelected={isSelected} color={color} size={size}>
           {title}
         </IconName>
       )}
@@ -48,13 +48,13 @@ const IconWrapper = styled.div`
   gap: 2px;
 `;
 const Icon = styled.div<{
-  isSelected: boolean;
+  $isSelected: boolean;
   src: string;
   width: string;
   height: string;
 }>`
   background-image: ${(props) =>
-    props.isSelected
+    props.$isSelected
       ? `linear-gradient(to bottom, rgba(1, 1, 122,0.4), rgba(1, 1, 122,0.4)), url(${props.src})`
       : `url(${props.src})`};
   background-size: contain;
@@ -63,15 +63,15 @@ const Icon = styled.div<{
   width: ${(props) => props.width};
 `;
 const IconName = styled.div<{
-  isSelected: boolean;
+  $isSelected: boolean;
   color: string;
   size: string;
 }>`
   color: ${(props) => props.color};
   background-color: ${(props) =>
-    props.isSelected ? "rgba(1, 1, 122, 0.4)" : "transparent"};
+    props.$isSelected ? "rgba(1, 1, 122, 0.4)" : "transparent"};
   border: ${(props) =>
-    props.isSelected ? "2px dotted darkgray" : `2px solid transparent`};
+    props.$isSelected ? "2px dotted darkgray" : `2px solid transparent`};
   font-size: ${(props) => props.size};
   padding: 2px;
   text-align: center;

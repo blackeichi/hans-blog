@@ -3,7 +3,7 @@ import { styled } from "styled-components";
 
 export const EachTask = ({
   task,
-  isMain,
+  isMain = false,
   width,
   onClickTask,
 }: {
@@ -16,7 +16,7 @@ export const EachTask = ({
     <TaskBox
       onClick={() => onClickTask(task)}
       width={`${width}%`}
-      isMain={isMain}
+      $isMain={isMain}
     >
       <Icon src={ICONS[task]} />
       <TaskTitle>{task}</TaskTitle>
@@ -24,7 +24,7 @@ export const EachTask = ({
   );
 };
 
-const TaskBox = styled.div<{ width: string; isMain: boolean }>`
+const TaskBox = styled.div<{ width: string; $isMain: boolean }>`
   height: 100%;
   max-width: 200px;
   width: ${(props) => props.width};
@@ -36,15 +36,15 @@ const TaskBox = styled.div<{ width: string; isMain: boolean }>`
   padding-left: 5px;
   gap: 5px;
   background-color: ${(props) =>
-    props.isMain ? "rgba(255,255,255,0.6)" : props.theme.gray};
+    props.$isMain ? "rgba(255,255,255,0.6)" : props.theme.gray};
   border-top: 2px solid
-    ${(props) => (props.isMain ? props.theme.darkGray : props.theme.lightGray)};
+    ${(props) => (props.$isMain ? props.theme.darkGray : props.theme.lightGray)};
   border-left: 2px solid
-    ${(props) => (props.isMain ? props.theme.darkGray : props.theme.lightGray)};
+    ${(props) => (props.$isMain ? props.theme.darkGray : props.theme.lightGray)};
   border-bottom: 2px solid
-    ${(props) => (props.isMain ? "white" : props.theme.darkGray)};
+    ${(props) => (props.$isMain ? "white" : props.theme.darkGray)};
   border-right: 2px solid
-    ${(props) => (props.isMain ? "white" : props.theme.darkGray)};
+    ${(props) => (props.$isMain ? "white" : props.theme.darkGray)};
 `;
 const Icon = styled.div<{ src: string }>`
   background-image: ${(props) => `url(${props.src})`};

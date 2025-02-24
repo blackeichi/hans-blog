@@ -2,13 +2,16 @@ import styled from "styled-components";
 import { TASK_LIST } from "$routes/Home/constants";
 import { DocumentWindow } from "./DocumentWindow";
 import { memo } from "react";
-import { MenuBtnsComponent } from "../../MenuBtnsComponent";
 import { ContentWrapperComponent } from "$components/ContentWrapperComponent";
+import { DocumentMenus } from "./DocumentMenus";
+import { MenuBtnsComponent } from "../../MenuBtnsComponent";
 
 const WindowContent = memo(({ type }: { type: string }) => {
   return (
     <>
-      <MenuBtnsComponent />
+      <MenuBtnsComponent>
+        <DocumentMenus />
+      </MenuBtnsComponent>
       <ContentWrapperComponent>
         {type === TASK_LIST.Documents ? <DocumentWindow /> : <TempBox />}
       </ContentWrapperComponent>

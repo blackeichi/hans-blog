@@ -16,7 +16,6 @@ import { ButtonComponent } from "$components/ButtonComponent";
 import { IWindowTitle } from "$routes/Home/types";
 import { useSetFolderSetting } from "$routes/Home/actions";
 import { SetStateType, TFolderList } from "$utils/types";
-import { IconComponent } from "$components/IconComponent";
 
 export const WindowTitle = ({
   windowState,

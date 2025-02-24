@@ -1,9 +1,9 @@
 import { motion } from "framer-motion";
 import { styled } from "styled-components";
 
-export const HomeContainer = styled.div<{ taskbarHeight: number }>`
+export const HomeContainer = styled.div<{ $taskbarHeight: number }>`
   width: 100%;
-  height: ${(props) => `calc(100% - ${props.taskbarHeight}px)`};
+  height: ${(props) => `calc(100% - ${props.$taskbarHeight}px)`};
   outline: none;
   position: relative;
   box-sizing: border-box;

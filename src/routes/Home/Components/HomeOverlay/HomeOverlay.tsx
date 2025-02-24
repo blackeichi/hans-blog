@@ -76,7 +76,7 @@ export const HomeOverly = memo(
     };
     return (
       <HomeContainer
-        taskbarHeight={TASK_BAR_HEIGHT}
+        $taskbarHeight={TASK_BAR_HEIGHT}
         onMouseDown={onDragStart}
         onMouseMove={dragStart ? onDrag : undefined}
         onClick={

@@ -45,7 +45,7 @@ export const ButtonComponent = ({
         duration: 0,
       }}
       tabIndex={-1}
-      isShadow={isShadow}
+      $isShadow={isShadow}
       onBlur={onBlur}
     >
       <Button
@@ -60,7 +60,7 @@ export const ButtonComponent = ({
             : {
                 padding: "1px",
                 border: "1px dashed gray",
-                fontSize: "12px",
+                fontSize: "10px",
                 width: "95%",
                 height: "95%",
               }
@@ -77,7 +77,7 @@ export const ButtonComponent = ({
 export const ButtonBox = styled(motion.button)<{
   width: string;
   height: string;
-  isShadow: boolean;
+  $isShadow: boolean;
 }>`
   width: ${(props) => props.width};
   height: ${(props) => props.height};
@@ -86,13 +86,13 @@ export const ButtonBox = styled(motion.button)<{
   justify-content: center;
   background-color: ${(props) => props.theme.gray};
   border-top: ${(props) =>
-    !props.isShadow ? "none" : `2px solid ${props.theme.lightGray}`};
+    !props.$isShadow ? "none" : `2px solid ${props.theme.lightGray}`};
   border-left: ${(props) =>
-    !props.isShadow ? "none" : `2px solid ${props.theme.lightGray}`};
+    !props.$isShadow ? "none" : `2px solid ${props.theme.lightGray}`};
   border-bottom: ${(props) =>
-    !props.isShadow ? "none" : `2px solid ${props.theme.shadow}`};
+    !props.$isShadow ? "none" : `2px solid ${props.theme.shadow}`};
   border-right: ${(props) =>
-    !props.isShadow ? "none" : `2px solid ${props.theme.shadow}`};
+    !props.$isShadow ? "none" : `2px solid ${props.theme.shadow}`};
   text-shadow: 1px 1px gray;
 `;
 const Button = styled(motion.div)`
@@ -102,4 +102,5 @@ const Button = styled(motion.div)`
   align-items: center;
   justify-content: center;
   font-weight: 600;
+  font-size: 12px;
 `;

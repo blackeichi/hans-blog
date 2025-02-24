@@ -1,31 +1,13 @@
-import { ButtonComponent } from "$components/ButtonComponent";
 import { TaskbarBlankBox } from "$components/Layout/Taskbar/components";
-import { isLoggedInState } from "$utils/atom";
-import { useState } from "react";
-import { useRecoilValue } from "recoil";
 import styled from "styled-components";
 import { FlexBox } from "styles";
-import { MenuComponent } from "./MenuComponent";
 
-export const MenuBtnsComponent = () => {
-  const isLoggedIn = useRecoilValue<boolean>(isLoggedInState);
-  const [open, setOpen] = useState(false);
+export const MenuBtnsComponent = ({ children }: { children?: JSX.Element }) => {
   return (
     <BtnBox>
       <PageBtnBox>
         <TaskbarBlankBox />
-        <ButtonComponent
-          action={() => {
-            setOpen((prev) => !prev);
-          }}
-          content={<span>File</span>}
-          width="50px"
-          height="25px"
-          isShadow={false}
-          onBlur={() => setOpen(false)}
-          disabled={!isLoggedIn}
-        />
-        {open && <MenuComponent />}
+        {children}
       </PageBtnBox>
     </BtnBox>
   );
@@ -40,6 +22,5 @@ const BtnBox = styled(FlexBox)`
 `;
 const PageBtnBox = styled(FlexBox)`
   height: 100%;
-  gap: 10px;
   position: relative;
 `;

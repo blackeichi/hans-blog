@@ -8,6 +8,7 @@ export const TaskbarBlankBox = styled.div`
   border-left: 2px solid ${(props) => props.theme.lightGray};
   border-bottom: 2px solid ${(props) => props.theme.shadow};
   border-right: 2px solid ${(props) => props.theme.shadow};
+  margin-right: 10px;
 `;
 
 export const TaskbarSeparator = styled.div`

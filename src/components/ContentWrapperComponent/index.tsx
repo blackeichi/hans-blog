@@ -2,21 +2,24 @@ import { styled } from "styled-components";
 
 export const ContentWrapperComponent = ({
   children = <></>,
+  style = {},
 }: {
   children?: JSX.Element;
+  style?: React.CSSProperties;
 }) => {
   return (
     <ContentWrapperComponentBox>
-      <WindowContent>{children}</WindowContent>
+      <WindowContent style={style}>{children}</WindowContent>
     </ContentWrapperComponentBox>
   );
 };
 
 const ContentWrapperComponentBox = styled.div`
   width: 100%;
-  height: calc(100% - 65px);
+  height: calc(100% - 75px);
   padding: 15px;
   padding-top: 0px;
+  margin-top: 10px;
 `;
 const WindowContent = styled.div`
   width: 100%;
@@ -25,6 +28,5 @@ const WindowContent = styled.div`
   border-top: 1px solid ${(props) => props.theme.darkGray};
   border-left: 1px solid ${(props) => props.theme.darkGray};
   outline: 4px solid ${(props) => props.theme.shadow};
-  overflow-x: scroll;
   padding: 10px;
 `;

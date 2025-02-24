@@ -26,3 +26,25 @@ export const FIRE_STORE_POSTS = "posts";
 export const FIRE_STORE_TAGS = "tags";
 
 export const URL_DOMAIN = "https://www.googleapis.com/youtube/v3/";
+
+export const GAME_BOARD_SIZE: {
+  width: number;
+  height: number;
+  totalMine: number;
+}[] = [
+  {
+    width: 9,
+    height: 9,
+    totalMine: 10,
+  },
+  {
+    width: 16,
+    height: 16,
+    totalMine: 40,
+  },
+  {
+    width: 30,
+    height: 16,
+    totalMine: 99,
+  },
+];
